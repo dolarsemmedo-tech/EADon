@@ -1,21 +1,23 @@
 const fs = require('fs');
 const cheerio = require('cheerio');
+
 const html = fs.readFileSync('index.html', 'utf8');
 const $ = cheerio.load(html, { decodeEntities: false });
 
-// 1. Remove previous treadmill style if it exists
+// 1. Remove previous custom styles and scripts
 $('#custom-treadmill-styles').remove();
+$('#custom-carousel-script').remove();
 $('style').each((i, el) => {
-    const text = $(el).text();
-    if (text.includes('transição do carrossel para ser linear')) {
-        $(el).remove();
-    }
+  const text = $(el).text();
+  if (text.includes('transição do carrossel para ser linear') || text.includes('transição linear contínua')) {
+    $(el).remove();
+  }
 });
 
-// 2. Inject the CSS style forcing linear transition ONLY for the image carousels (NOT the card carousel!)
-const treadmillCSS = `
+// 2. Inject the custom CSS style in <head> for ALL image-based carousels (both standard and nested)
+const customCSS = `
 <style id="custom-treadmill-styles">
-/* Força a transição linear contínua APENAS nos carrosséis de imagem (efeito esteira) */
+/* Força a transição linear contínua nos carrosséis de imagem (efeito esteira) */
 .elementor-widget-image-carousel .swiper-wrapper,
 .e-n-carousel .swiper-wrapper {
     -webkit-transition-timing-function: linear !important;
@@ -23,51 +25,97 @@ const treadmillCSS = `
 }
 </style>
 `;
-$('head').append(treadmillCSS);
+$('head').append(customCSS);
 
-// 3. Configure Image Carousels (Continuous Treadmill)
-let imageUpdated = 0;
-$('.elementor-widget-image-carousel, .e-n-carousel').each((i, el) => {
-    const settingsAttr = $(el).attr('data-settings');
-    if (settingsAttr) {
-        try {
-            const settings = JSON.parse(settingsAttr);
-            settings.autoplay = "yes";
-            settings.autoplay_speed = 10; // Continuous scroll
-            settings.speed = 4000; // Ultra smooth 4 seconds scroll
-            settings.pause_on_hover = "yes"; // Pause on hover
-            settings.pause_on_interaction = "no";
-            settings.infinite = "yes";
-            $(el).attr('data-settings', JSON.stringify(settings));
-            imageUpdated++;
-        } catch (e) {
-            console.error("Error updating image carousel", i);
-        }
+// 3. Update static HTML data-settings for image carousels
+$('.elementor-widget-image-carousel').each((i, el) => {
+  const settingsAttr = $(el).attr('data-settings');
+  if (settingsAttr) {
+    try {
+      const settings = JSON.parse(settingsAttr);
+      settings.autoplay = "yes";
+      settings.autoplay_speed = 0; // 0 delay for marquee
+      settings.speed = 6000; // 6 seconds smooth scroll
+      settings.pause_on_hover = "no"; // Disabled to ensure 100% stability
+      settings.pause_on_interaction = "no";
+      settings.infinite = "yes";
+      $(el).attr('data-settings', JSON.stringify(settings));
+    } catch (e) {
+      console.error("Error parsing settings for image carousel", i);
     }
+  }
 });
 
-// 4. Configure Card Carousel / Nested Carousel (Normal Autoplay - snaps smoothly)
-let cardUpdated = 0;
+// 4. Update static HTML data-settings for nested carousels (Cursos Livres / e-n-carousel)
 $('.elementor-widget-n-carousel').each((i, el) => {
-    const settingsAttr = $(el).attr('data-settings');
-    if (settingsAttr) {
-        try {
-            const settings = JSON.parse(settingsAttr);
-            settings.autoplay = "yes";
-            settings.autoplay_speed = 4000; // Slides every 4 seconds
-            settings.speed = 800; // Smooth 0.8s snap transition
-            settings.pause_on_hover = "yes"; // Pause on hover
-            settings.pause_on_interaction = "no"; // Auto-resume after user clicks/drags
-            settings.infinite = "yes";
-            $(el).attr('data-settings', JSON.stringify(settings));
-            cardUpdated++;
-        } catch (e) {
-            console.error("Error updating nested card carousel", i);
-        }
+  const settingsAttr = $(el).attr('data-settings');
+  if (settingsAttr) {
+    try {
+      const settings = JSON.parse(settingsAttr);
+      settings.autoplay = "yes";
+      settings.autoplay_speed = 0; // 0 delay for marquee
+      settings.speed = 6000; // 6 seconds smooth scroll
+      settings.pause_on_hover = "no"; // Disabled to ensure 100% stability
+      settings.pause_on_interaction = "no";
+      settings.infinite = "yes";
+      $(el).attr('data-settings', JSON.stringify(settings));
+    } catch (e) {
+      console.error("Error parsing settings for nested carousel", i);
     }
+  }
 });
+
+// 5. Inject the robust native runtime manager script at the end of <body>
+const customJS = `
+<script id="custom-carousel-script">
+document.addEventListener("DOMContentLoaded", function() {
+    function startAndConfigureSwipers() {
+        if (typeof jQuery === 'undefined') return;
+        
+        jQuery('.swiper-container, .swiper').each(function() {
+            var $swiperEl = jQuery(this);
+            var swiperInstance = $swiperEl.data('swiper') || this.swiper;
+            
+            if (swiperInstance && swiperInstance.autoplay) {
+                // Configure Swiper native params for all carousels to achieve smooth marquee (esteira)
+                swiperInstance.params.autoplay.delay = 0;
+                swiperInstance.params.autoplay.disableOnInteraction = false;
+                swiperInstance.params.autoplay.pauseOnMouseEnter = false; // Disabled to prevent desktop freezes
+                
+                // Continuous glide speed
+                swiperInstance.params.speed = 6000;
+                
+                // Force Swiper parameters update
+                swiperInstance.update();
+                
+                // Wake up autoplay if not running
+                if (!swiperInstance.autoplay.running) {
+                    swiperInstance.autoplay.run();
+                    swiperInstance.autoplay.start();
+                }
+                
+                // Remove all manual hover event listeners
+                $swiperEl.off('mouseenter mouseleave');
+            }
+        });
+    }
+
+    // Wake up Swipers on various events to handle lazy loading & scroll intersections
+    setTimeout(startAndConfigureSwipers, 500);
+    setTimeout(startAndConfigureSwipers, 1500);
+    setTimeout(startAndConfigureSwipers, 3000);
+    
+    window.addEventListener('load', startAndConfigureSwipers);
+    window.addEventListener('scroll', startAndConfigureSwipers);
+    
+    // Listen to Elementor init
+    jQuery(window).on('elementor/frontend/init', function() {
+        setTimeout(startAndConfigureSwipers, 500);
+    });
+});
+</script>
+`;
+$('body').append(customJS);
 
 fs.writeFileSync('index.html', $.html());
-console.log(`Successfully configured carousels:`);
-console.log(` - ${imageUpdated} image carousels set to Treadmill (continuous scroll).`);
-console.log(` - ${cardUpdated} card/nested carousels set to Normal Autoplay (4s interval with smooth snapping).`);
+console.log('Successfully configured all carousels natively without hover pause to ensure maximum stability across all devices!');
