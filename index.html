@@ -106,21 +106,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 
-<style>
-/* Efeito de fade (dissolver) nas bordas dos carrosséis */
-.elementor-widget-image-carousel .elementor-image-carousel-wrapper,
-.elementor-widget-n-carousel .swiper,
-.e-n-carousel.swiper {
-    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-}
 
-/* Ocultar as setas já que agora o carrossel roda sozinho como esteira */
-.elementor-widget-image-carousel .elementor-swiper-button,
-.elementor-widget-n-carousel .elementor-swiper-button {
-    display: none !important;
-}
-</style>
 
 <style>
 /* Efeitos sofisticados para os cards de Diferenciais */
@@ -282,12 +268,16 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 
 
 
+
+
 <style id="custom-carousel-premium-styles">
 /* Garante que o container pai tenha posicionamento relativo para conter as setas absolutas */
 .elementor-image-carousel-wrapper,
 .e-n-carousel,
 .swiper {
     position: relative !important;
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
 }
 
 /* Garante que as setas de navegação do Swiper fiquem visíveis, com bom contraste e cursor de clique */
@@ -299,11 +289,11 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
     align-items: center;
     justify-content: center;
     color: #1b855a !important; /* Verde principal do site */
-    background: rgba(255, 255, 255, 0.9) !important;
+    background: rgba(255, 255, 255, 0.95) !important;
     width: 44px !important;
     height: 44px !important;
     border-radius: 50% !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
     transition: all 0.3s ease !important;
     cursor: pointer !important;
     z-index: 100 !important;
@@ -1538,6 +1528,8 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 </script>
+
+
 
 
 
