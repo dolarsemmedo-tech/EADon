@@ -361,223 +361,116 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 }
 </style>
 
-<style id="custom-carousel-scratch-styles">
-.custom-swiper-outer-container {
-    width: 100%;
-    margin-top: 40px;
-    margin-bottom: 40px;
-    box-sizing: border-box;
-}
 
-/* Flex layout that puts navigation buttons OUTSIDE the swiper */
-.custom-swiper-navigation-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    position: relative;
-}
-
-.custom-swiper-container {
-    width: calc(100% - 120px); /* Space for 60px on left and right for navigation buttons */
-    overflow: hidden;
-    position: relative;
-    padding-bottom: 35px !important; /* Extra bottom padding for bullets */
-}
-
-/* Premium circular chevrons located OUTSIDE the slider wrapper */
-.custom-swiper-button-prev,
-.custom-swiper-button-next {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    color: #1b855a !important; /* Theme Green */
-    background: rgba(255, 255, 255, 0.95) !important;
-    width: 44px !important;
-    height: 44px !important;
-    border-radius: 50% !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
-    transition: all 0.3s ease !important;
-    cursor: pointer !important;
-    z-index: 10 !important;
-    user-select: none !important;
-    flex-shrink: 0 !important;
-    border: none !important;
-}
-
-.custom-swiper-button-prev:hover,
-.custom-swiper-button-next:hover {
-    transform: scale(1.1) !important;
-    background: #1b855a !important;
-    color: #ffffff !important;
-}
-
-.custom-swiper-button-prev {
-    margin-right: 15px !important;
-}
-
-.custom-swiper-button-next {
-    margin-left: 15px !important;
-}
-
-.custom-swiper-button-prev svg,
-.custom-swiper-button-next svg {
-    width: 18px !important;
-    height: 18px !important;
-    fill: currentColor !important;
-    display: block !important;
-}
-
-/* Slide Cards Easing */
-.custom-swiper-container .swiper-slide {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-}
-
-.custom-swiper-container .swiper-slide-inner {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    display: block;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.custom-swiper-container .swiper-slide-inner:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(27, 133, 90, 0.2);
-}
-
-.custom-slide-image {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
-    border-radius: 12px;
-}
-
-/* Bullet Dots alignment */
-.custom-swiper-pagination {
-    bottom: 0px !important;
-}
-
-.custom-swiper-pagination .swiper-pagination-bullet {
-    background: #cccccc !important;
-    opacity: 0.6 !important;
-    width: 10px !important;
-    height: 10px !important;
-    transition: all 0.3s ease !important;
-}
-
-.custom-swiper-pagination .swiper-pagination-bullet-active {
-    background: #1b855a !important;
-    opacity: 1 !important;
-    width: 24px !important;
-    border-radius: 5px !important;
-}
-</style>
 <link id="custom-swiper-cdn-css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.css">
-<style id="vanilla-carousel-test-style">
-  #vanilla-carousel-test-section {
+
+
+<style id="vanilla-carousel-style">
+  /* ── Container principal ── */
+  #vc-section {
     width: 100%;
-    padding: 30px 20px;
+    padding: 0 0 32px 0;
     box-sizing: border-box;
-    background: rgba(0,0,0,0.2);
-    border-top: 3px solid #1b855a;
   }
-  #vanilla-carousel-test-section h3 {
-    text-align: center;
-    color: #fff;
-    font-size: 18px;
-    margin-bottom: 20px;
-    font-family: sans-serif;
-  }
-  #vanilla-carousel-wrapper {
+
+  /* ── Wrapper: seta | track | seta ── */
+  #vc-wrapper {
     display: flex;
     align-items: center;
-    gap: 12px;
     width: 100%;
+    gap: 0;
   }
-  #vanilla-carousel-btn-prev,
-  #vanilla-carousel-btn-next {
+
+  /* ── Setas de navegação (FORA das imagens) ── */
+  #vc-btn-prev,
+  #vc-btn-next {
     flex-shrink: 0;
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: white;
+    background: rgba(255,255,255,0.92);
     color: #1b855a;
     border: none;
-    font-size: 22px;
-    font-weight: bold;
+    font-size: 26px;
+    font-weight: 700;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    transition: background 0.2s, color 0.2s;
-    line-height: 1;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.22);
+    transition: background 0.25s, color 0.25s, transform 0.2s;
     user-select: none;
     -webkit-user-select: none;
+    line-height: 1;
+    z-index: 10;
   }
-  #vanilla-carousel-btn-prev:hover,
-  #vanilla-carousel-btn-next:hover {
+  #vc-btn-prev { margin-right: 12px; }
+  #vc-btn-next { margin-left: 12px; }
+  #vc-btn-prev:hover,
+  #vc-btn-next:hover {
     background: #1b855a;
-    color: white;
+    color: #fff;
+    transform: scale(1.1);
   }
-  #vanilla-carousel-track-outer {
+  #vc-btn-prev:active,
+  #vc-btn-next:active {
+    transform: scale(0.96);
+  }
+
+  /* ── Track (viewport do slide) ── */
+  #vc-track-outer {
     flex: 1;
     overflow: hidden;
-    border-radius: 10px;
+    border-radius: 14px;
   }
-  #vanilla-carousel-track {
+  #vc-track {
     display: flex;
-    gap: 15px;
-    transition: transform 0.4s ease;
+    gap: 16px;
+    transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     will-change: transform;
   }
-  .vanilla-slide {
+
+  /* ── Cada slide / card ── */
+  .vc-slide {
     flex-shrink: 0;
-    border-radius: 12px;
+    border-radius: 14px;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.28);
+    border-bottom: 4px solid #1b855a;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
-  .vanilla-slide img {
+  .vc-slide:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(27,133,90,0.3);
+  }
+  .vc-slide img {
     width: 100%;
     height: auto;
     display: block;
-    border-radius: 12px;
+    border-radius: 14px 14px 0 0;
   }
-  #vanilla-carousel-dots {
+
+  /* ── Bolinhas de paginação ── */
+  #vc-dots {
     display: flex;
     justify-content: center;
     gap: 8px;
-    margin-top: 16px;
+    margin-top: 20px;
   }
-  .vanilla-dot {
+  .vc-dot {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.35);
     cursor: pointer;
-    transition: all 0.3s;
     border: none;
+    padding: 0;
+    transition: all 0.3s;
   }
-  .vanilla-dot.active {
+  .vc-dot.active {
     background: #1b855a;
-    width: 24px;
+    width: 26px;
     border-radius: 5px;
-  }
-  @media (max-width: 768px) {
-    #vanilla-carousel-btn-prev,
-    #vanilla-carousel-btn-next {
-      width: 36px;
-      height: 36px;
-      font-size: 18px;
-    }
   }
 </style>
 </head>
@@ -842,65 +735,38 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 									</div>
 						</div>
 				</div>
-<section id="vanilla-carousel-test-section">
-  <h3>🧪 Carrossel de Teste (Vanilla JS — sem Swiper)</h3>
-  <div id="vanilla-carousel-wrapper">
-    <button id="vanilla-carousel-btn-prev" aria-label="Anterior">‹</button>
-    <div id="vanilla-carousel-track-outer">
-      <div id="vanilla-carousel-track">
-        <div class="vanilla-slide"><img src="wp-content/uploads/2026/04/tecnicos.jpg" alt="Cursos Técnicos" loading="lazy"></div>
-<div class="vanilla-slide"><img src="wp-content/uploads/2026/05/eja.jpg" alt="Cursos de EJA" loading="lazy"></div>
-<div class="vanilla-slide"><img src="wp-content/uploads/2026/04/graduacao.jpg" alt="Cursos de Graduação" loading="lazy"></div>
-<div class="vanilla-slide"><img src="wp-content/uploads/2026/04/pos.jpg" alt="Pós-Graduação" loading="lazy"></div>
-<div class="vanilla-slide"><img src="wp-content/uploads/2026/04/segunda-licenciatura.jpg" alt="Segunda Licenciatura" loading="lazy"></div>
-<div class="vanilla-slide"><img src="wp-content/uploads/2026/04/nrs.jpg" alt="Cursos de NRs" loading="lazy"></div>
-<div class="vanilla-slide"><img src="wp-content/uploads/2026/04/transito.jpg" alt="Trânsito" loading="lazy"></div>
-<div class="vanilla-slide"><img src="wp-content/uploads/2026/04/certificacao-por-competencia.jpg" alt="Certificação por Competência" loading="lazy"></div>
+<div id="vc-section">
+  <div id="vc-wrapper">
+    <button id="vc-btn-prev" aria-label="Anterior">‹</button>
+    <div id="vc-track-outer">
+      <div id="vc-track">
+        <div class="vc-slide"><img src="wp-content/uploads/2026/04/tecnicos.jpg" alt="Cursos Técnicos" loading="lazy"></div>
+        <div class="vc-slide"><img src="wp-content/uploads/2026/05/eja.jpg" alt="Cursos de EJA" loading="lazy"></div>
+        <div class="vc-slide"><img src="wp-content/uploads/2026/04/graduacao.jpg" alt="Cursos de Graduação" loading="lazy"></div>
+        <div class="vc-slide"><img src="wp-content/uploads/2026/04/pos.jpg" alt="Pós-Graduação" loading="lazy"></div>
+        <div class="vc-slide"><img src="wp-content/uploads/2026/04/segunda-licenciatura.jpg" alt="Segunda Licenciatura" loading="lazy"></div>
+        <div class="vc-slide"><img src="wp-content/uploads/2026/04/nrs.jpg" alt="Cursos de NRs" loading="lazy"></div>
+        <div class="vc-slide"><img src="wp-content/uploads/2026/04/transito.jpg" alt="Trânsito" loading="lazy"></div>
+        <div class="vc-slide"><img src="wp-content/uploads/2026/04/certificacao-por-competencia.jpg" alt="Certificação por Competência" loading="lazy"></div>
       </div>
     </div>
-    <button id="vanilla-carousel-btn-next" aria-label="Próximo">›</button>
+    <button id="vc-btn-next" aria-label="Próximo">›</button>
   </div>
-  <div id="vanilla-carousel-dots">
-    <button class="vanilla-dot active" data-index="0" aria-label="Slide 1"></button>
-<button class="vanilla-dot" data-index="1" aria-label="Slide 2"></button>
-<button class="vanilla-dot" data-index="2" aria-label="Slide 3"></button>
-<button class="vanilla-dot" data-index="3" aria-label="Slide 4"></button>
-<button class="vanilla-dot" data-index="4" aria-label="Slide 5"></button>
-<button class="vanilla-dot" data-index="5" aria-label="Slide 6"></button>
-<button class="vanilla-dot" data-index="6" aria-label="Slide 7"></button>
-<button class="vanilla-dot" data-index="7" aria-label="Slide 8"></button>
+  <div id="vc-dots">
+    <button class="vc-dot active" data-index="0" aria-label="Ir para slide 1"></button>
+    <button class="vc-dot" data-index="1" aria-label="Ir para slide 2"></button>
+    <button class="vc-dot" data-index="2" aria-label="Ir para slide 3"></button>
+    <button class="vc-dot" data-index="3" aria-label="Ir para slide 4"></button>
+    <button class="vc-dot" data-index="4" aria-label="Ir para slide 5"></button>
+    <button class="vc-dot" data-index="5" aria-label="Ir para slide 6"></button>
+    <button class="vc-dot" data-index="6" aria-label="Ir para slide 7"></button>
+    <button class="vc-dot" data-index="7" aria-label="Ir para slide 8"></button>
   </div>
-</section>
-
-<div class="custom-swiper-outer-container">
-    <div class="custom-swiper-navigation-wrapper">
-        <!-- Left chevron outside the swiper slider -->
-        <div class="custom-swiper-button-prev" role="button" tabindex="0">
-            <svg aria-hidden="true" class="e-font-icon-svg e-eicon-chevron-left" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg"><path d="M646 125C629 125 613 133 604 142L308 442C296 454 292 471 292 487 292 504 296 521 308 533L604 854C617 867 629 875 646 875 663 875 679 871 692 858 704 846 713 829 713 812 713 796 708 779 692 767L438 487 692 225C700 217 708 204 708 187 708 171 704 154 692 142 675 129 663 125 646 125Z"></path></svg>
-        </div>
-        
-        <!-- The actual swiper slider -->
-        <div class="custom-swiper-container swiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"><figure class="swiper-slide-inner"><img src="wp-content/uploads/2026/04/tecnicos.jpg" alt="Cursos Técnicos" class="custom-slide-image"></figure></div>
-                <div class="swiper-slide"><figure class="swiper-slide-inner"><img src="wp-content/uploads/2026/05/eja.jpg" alt="Cursos de EJA" class="custom-slide-image"></figure></div>
-                <div class="swiper-slide"><figure class="swiper-slide-inner"><img src="wp-content/uploads/2026/04/graduacao.jpg" alt="Cursos de Graduação" class="custom-slide-image"></figure></div>
-                <div class="swiper-slide"><figure class="swiper-slide-inner"><img src="wp-content/uploads/2026/04/pos.jpg" alt="Pós-Graduação" class="custom-slide-image"></figure></div>
-                <div class="swiper-slide"><figure class="swiper-slide-inner"><img src="wp-content/uploads/2026/04/segunda-licenciatura.jpg" alt="Segunda Licenciatura" class="custom-slide-image"></figure></div>
-                <div class="swiper-slide"><figure class="swiper-slide-inner"><img src="wp-content/uploads/2026/04/nrs.jpg" alt="NRS" class="custom-slide-image"></figure></div>
-                <div class="swiper-slide"><figure class="swiper-slide-inner"><img src="wp-content/uploads/2026/04/transito.jpg" alt="Trânsito" class="custom-slide-image"></figure></div>
-                <div class="swiper-slide"><figure class="swiper-slide-inner"><img src="wp-content/uploads/2026/04/certificacao-por-competencia.jpg" alt="Certificação por Competência" class="custom-slide-image"></figure></div>
-            </div>
-            <!-- Bottom bullet dots pagination -->
-            <div class="swiper-pagination custom-swiper-pagination"></div>
-        </div>
-        
-        <!-- Right chevron outside the swiper slider -->
-        <div class="custom-swiper-button-next" role="button" tabindex="0">
-            <svg aria-hidden="true" class="e-font-icon-svg e-eicon-chevron-right" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg"><path d="M696 533C708 521 713 504 713 487 713 471 708 454 696 446L400 146C388 133 375 125 354 125 338 125 325 129 313 142 300 154 292 171 292 187 292 204 296 221 308 233L563 492 304 771C292 783 288 800 288 817 288 833 296 850 308 863 321 871 338 875 354 875 371 875 388 867 400 854L696 533Z"></path></svg>
-        </div>
-    </div>
 </div>
+
+
+
+
 
 				
 				<div class="elementor-element elementor-element-3c48329b elementor-align-center elementor-mobile-align-justify elementor-widget elementor-widget-button" data-id="3c48329b" data-element_type="widget" data-e-type="widget" data-widget_type="button.default">
@@ -1896,178 +1762,81 @@ document.addEventListener("DOMContentLoaded", function() {
 })();
 </script>
 
-<script id="custom-swiper-scratch-init-script">
+
+
+
+
+<script id="vanilla-carousel-script">
 (function() {
-    var customSwiperInstance = null;
-    var customSwiperInitInterval = null;
-    
-    function initCustomSwiper() {
-        if (typeof jQuery === 'undefined' || typeof Swiper === 'undefined') return;
-        
-        var $swiperContainer = jQuery('.custom-swiper-container');
-        if ($swiperContainer.length === 0 || $swiperContainer.attr('data-initialized') === 'true') return;
-        
-        try {
-            customSwiperInstance = new Swiper('.custom-swiper-container', {
-                loop: true,
-                autoplay: {
-                    delay: 4000,
-                    disableOnInteraction: false,
-                    pauseOnMouseEnter: true
-                },
-                navigation: {
-                    nextEl: '.custom-swiper-button-next',
-                    prevEl: '.custom-swiper-button-prev'
-                },
-                pagination: {
-                    el: '.custom-swiper-pagination',
-                    clickable: true
-                },
-                slidesPerView: 3, // Mobile slides (3 images visible at a time)
-                spaceBetween: 15,
-                breakpoints: {
-                    // Desktop slides (4 images visible at a time)
-                    1024: {
-                        slidesPerView: 4,
-                        spaceBetween: 25
-                    }
-                }
-            });
-            
-            $swiperContainer.attr('data-initialized', 'true');
-            console.log('Successfully initialized custom Swiper (4 slides desktop, 3 slides mobile, arrows outside)!');
-            
-            if (customSwiperInitInterval) {
-                clearInterval(customSwiperInitInterval);
-            }
-        } catch (e) {
-            console.error('Error initializing custom Swiper:', e);
-        }
-    }
+  function init() {
+    var track   = document.getElementById('vc-track');
+    var outer   = document.getElementById('vc-track-outer');
+    var btnPrev = document.getElementById('vc-btn-prev');
+    var btnNext = document.getElementById('vc-btn-next');
+    var dots    = document.querySelectorAll('.vc-dot');
+    var slides  = document.querySelectorAll('.vc-slide');
 
-    // Polling helper to completely avoid script loading race conditions with jQuery or Swiper.js
-    var pollCount = 0;
-    customSwiperInitInterval = setInterval(function() {
-        pollCount++;
-        if (typeof jQuery !== 'undefined' && typeof Swiper !== 'undefined') {
-            initCustomSwiper();
-        } else if (pollCount > 300) { // Stop polling after 15 seconds to save resources
-            clearInterval(customSwiperInitInterval);
-            console.warn('jQuery or Swiper not loaded. Custom swiper initialization cancelled.');
-        }
-    }, 50);
-    
-    window.addEventListener('load', initCustomSwiper);
-})();
-</script>
-
-<script id="vanilla-carousel-test-script">
-(function() {
-  // Wait for DOM to be ready
-  function ready(fn) {
-    if (document.readyState !== 'loading') {
-      fn();
-    } else {
-      document.addEventListener('DOMContentLoaded', fn);
-    }
-  }
-
-  ready(function() {
-    var track = document.getElementById('vanilla-carousel-track');
-    var outer = document.getElementById('vanilla-carousel-track-outer');
-    var btnPrev = document.getElementById('vanilla-carousel-btn-prev');
-    var btnNext = document.getElementById('vanilla-carousel-btn-next');
-    var dots = document.querySelectorAll('.vanilla-dot');
-    var slides = document.querySelectorAll('.vanilla-slide');
-
-    if (!track || !outer || !btnPrev || !btnNext) {
-      console.error('[VanillaCarousel] Elements not found!');
+    if (!track || !outer || !btnPrev || !btnNext || slides.length === 0) {
+      // Retry if elements not yet in DOM
+      setTimeout(init, 100);
       return;
     }
 
-    console.log('[VanillaCarousel] Initializing with', slides.length, 'slides.');
+    var GAP = 16;
+    var current = 0;
 
-    var currentIndex = 0;
-    var visibleCount = 4; // desktop default
+    function visible() { return window.innerWidth <= 768 ? 3 : 4; }
 
-    function getSlidesVisible() {
-      return window.innerWidth <= 768 ? 3 : 4;
+    function slideW() {
+      var v = visible();
+      return (outer.offsetWidth - GAP * (v - 1)) / v;
     }
 
-    function getSlideWidth() {
-      var gap = 15;
-      var count = getSlidesVisible();
-      return (outer.offsetWidth - (gap * (count - 1))) / count;
+    function setSizes() {
+      var w = slideW();
+      slides.forEach(function(s) { s.style.width = w + 'px'; });
     }
 
-    function setSlideWidths() {
-      var w = getSlideWidth();
-      slides.forEach(function(slide) {
-        slide.style.width = w + 'px';
-      });
-    }
+    function maxIdx() { return Math.max(0, slides.length - visible()); }
 
-    function getMaxIndex() {
-      return Math.max(0, slides.length - getSlidesVisible());
-    }
-
-    function goTo(index) {
-      var max = getMaxIndex();
-      if (index < 0) index = max;
-      if (index > max) index = 0;
-      currentIndex = index;
-
-      var slideW = getSlideWidth();
-      var gap = 15;
-      var offset = currentIndex * (slideW + gap);
+    function goTo(idx) {
+      if (idx < 0)        idx = maxIdx();
+      if (idx > maxIdx()) idx = 0;
+      current = idx;
+      var offset = current * (slideW() + GAP);
       track.style.transform = 'translateX(-' + offset + 'px)';
-
-      dots.forEach(function(dot, i) {
-        dot.classList.toggle('active', i === currentIndex);
+      dots.forEach(function(d, i) {
+        d.classList.toggle('active', i === current);
       });
-
-      console.log('[VanillaCarousel] Moved to slide', currentIndex);
     }
 
-    function next() { goTo(currentIndex + 1); }
-    function prev() { goTo(currentIndex - 1); }
-
-    btnNext.addEventListener('click', function() {
-      console.log('[VanillaCarousel] Next clicked');
-      next();
-    });
-
-    btnPrev.addEventListener('click', function() {
-      console.log('[VanillaCarousel] Prev clicked');
-      prev();
-    });
-
-    dots.forEach(function(dot) {
-      dot.addEventListener('click', function() {
-        goTo(parseInt(this.getAttribute('data-index')));
+    btnNext.addEventListener('click', function() { goTo(current + 1); });
+    btnPrev.addEventListener('click', function() { goTo(current - 1); });
+    dots.forEach(function(d) {
+      d.addEventListener('click', function() {
+        goTo(parseInt(this.getAttribute('data-index'), 10));
       });
     });
 
-    // Autoplay every 4 seconds
-    var autoplayInterval = setInterval(next, 4000);
-
-    // Pause autoplay on hover
-    outer.addEventListener('mouseenter', function() { clearInterval(autoplayInterval); });
+    var timer = setInterval(function() { goTo(current + 1); }, 4000);
+    outer.addEventListener('mouseenter', function() { clearInterval(timer); });
     outer.addEventListener('mouseleave', function() {
-      autoplayInterval = setInterval(next, 4000);
+      clearInterval(timer);
+      timer = setInterval(function() { goTo(current + 1); }, 4000);
     });
 
-    // Handle resize
-    window.addEventListener('resize', function() {
-      setSlideWidths();
-      goTo(currentIndex);
-    });
+    window.addEventListener('resize', function() { setSizes(); goTo(current); });
 
-    // Init
-    setSlideWidths();
+    setSizes();
     goTo(0);
-    console.log('[VanillaCarousel] Ready!');
-  });
+    console.log('[VanillaCarousel] Initialized successfully with', slides.length, 'slides.');
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();
 </script>
 </body></html>
