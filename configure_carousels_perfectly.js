@@ -36,7 +36,7 @@ $('.elementor-widget-image-carousel').each((i, el) => {
       settings.autoplay = "yes";
       settings.autoplay_speed = 0; // 0 delay for marquee
       settings.speed = 6000; // 6 seconds smooth scroll
-      settings.pause_on_hover = "no"; // Disabled to ensure 100% stability
+      settings.pause_on_hover = "no"; 
       settings.pause_on_interaction = "no";
       settings.infinite = "yes";
       $(el).attr('data-settings', JSON.stringify(settings));
@@ -55,7 +55,7 @@ $('.elementor-widget-n-carousel').each((i, el) => {
       settings.autoplay = "yes";
       settings.autoplay_speed = 0; // 0 delay for marquee
       settings.speed = 6000; // 6 seconds smooth scroll
-      settings.pause_on_hover = "no"; // Disabled to ensure 100% stability
+      settings.pause_on_hover = "no"; 
       settings.pause_on_interaction = "no";
       settings.infinite = "yes";
       $(el).attr('data-settings', JSON.stringify(settings));
@@ -65,13 +65,11 @@ $('.elementor-widget-n-carousel').each((i, el) => {
   }
 });
 
-// 5. Inject the robust native runtime manager script at the end of <body>
+// 5. Inject the robust native runtime manager script with jQuery polling at the end of <body>
 const customJS = `
 <script id="custom-carousel-script">
-document.addEventListener("DOMContentLoaded", function() {
+(function() {
     function startAndConfigureSwipers() {
-        if (typeof jQuery === 'undefined') return;
-        
         jQuery('.swiper-container, .swiper').each(function() {
             var $swiperEl = jQuery(this);
             var swiperInstance = $swiperEl.data('swiper') || this.swiper;
@@ -100,22 +98,36 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Wake up Swipers on various events to handle lazy loading & scroll intersections
-    setTimeout(startAndConfigureSwipers, 500);
-    setTimeout(startAndConfigureSwipers, 1500);
-    setTimeout(startAndConfigureSwipers, 3000);
-    
-    window.addEventListener('load', startAndConfigureSwipers);
-    window.addEventListener('scroll', startAndConfigureSwipers);
-    
-    // Listen to Elementor init
-    jQuery(window).on('elementor/frontend/init', function() {
-        setTimeout(startAndConfigureSwipers, 500);
-    });
-});
+    // Poll for jQuery to be loaded to completely avoid any script loading race conditions
+    var checkCount = 0;
+    var jQueryPoll = setInterval(function() {
+        checkCount++;
+        if (typeof jQuery !== 'undefined') {
+            clearInterval(jQueryPoll);
+            
+            // Execute configuration immediately and then schedule followups to handle Elementor delayed init
+            startAndConfigureSwipers();
+            
+            setTimeout(startAndConfigureSwipers, 500);
+            setTimeout(startAndConfigureSwipers, 1500);
+            setTimeout(startAndConfigureSwipers, 3000);
+            
+            window.addEventListener('load', startAndConfigureSwipers);
+            window.addEventListener('scroll', startAndConfigureSwipers);
+            
+            // Listen to Elementor init
+            jQuery(window).on('elementor/frontend/init', function() {
+                setTimeout(startAndConfigureSwipers, 500);
+            });
+        } else if (checkCount > 100) { // Stop polling after 5 seconds to save resources if jQuery fails
+            clearInterval(jQueryPoll);
+            console.warn('jQuery not found. Carousel config skipped.');
+        }
+    }, 50);
+})();
 </script>
 `;
 $('body').append(customJS);
 
 fs.writeFileSync('index.html', $.html());
-console.log('Successfully configured all carousels natively without hover pause to ensure maximum stability across all devices!');
+console.log('Successfully configured all carousels natively with robust jQuery polling!');
