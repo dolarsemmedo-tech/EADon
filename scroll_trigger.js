@@ -3,57 +3,70 @@ const cheerio = require('cheerio');
 const html = fs.readFileSync('index.html', 'utf8');
 const $ = cheerio.load(html, { decodeEntities: false });
 
-// 1. Remove previous custom animation styles to avoid bloat
+// Remove previous styles and scripts to update cleanly
 $('style').each((i, el) => {
     const text = $(el).text();
-    if (text.includes('ANIMAÇÕES SOFISTICADAS NA SEÇÃO PRINCIPAL') || 
-        text.includes('ANIMAÇÕES SOFISTICADAS NA SEGUNDA SEÇÃO')) {
+    if (text.includes('SISTEMA DE ANIMAÇÃO AO ROLAR A TELA (SCROLL REVEAL)')) {
         $(el).remove();
     }
 });
+$('#custom-scroll-reveal-script').remove();
 
-// 2. Define the new consolidated CSS for transitions on scroll
-const newScrollStyles = `
+const fixedStyles = `
 <style id="custom-scroll-reveal-styles">
 /* ========================================================
-   SISTEMA DE ANIMAÇÃO AO ROLAR A TELA (SCROLL REVEAL)
+   SISTEMA DE ANIMAÇÃO AO ROLAR A TELA (SCROLL REVEAL) - FIX
    ======================================================== */
 
-/* Configuração Inicial de invisibilidade para os elementos que vão surgir */
+/* Configuração Inicial dos Títulos (Invisível) */
 .elementor-element-4827e1c7, 
 .elementor-element-36b75d89,
-.elementor-element-7ef56d00 .elementor-icon-list-item,
-.elementor-element-1018c2ab .elementor-icon-list-item,
-.elementor-element-38869286,
-.elementor-element-20b1ea80 .elementor-icon-list-item {
+.elementor-element-38869286 {
     opacity: 0 !important;
     transform: translateY(30px) !important;
     transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-/* Classe ativada via JavaScript quando o usuário rola até a seção */
+/* Configuração Inicial dos Itens da Lista (Invisível) */
+.elementor-element-7ef56d00 .elementor-icon-list-item,
+.elementor-element-1018c2ab .elementor-icon-list-item,
+.elementor-element-20b1ea80 .elementor-icon-list-item {
+    opacity: 0 !important;
+    transform: translateY(20px) !important;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Quando os elementos individuais (títulos) ganham a classe active */
 .reveal-active {
     opacity: 1 !important;
     transform: translateY(0) !important;
 }
 
-/* Efeito Cascata (Staggered Delay) para a Seção 1 (Hero) - Desktop & Mobile */
-.elementor-element-7ef56d00 .elementor-icon-list-item:nth-child(1).reveal-active,
-.elementor-element-1018c2ab .elementor-icon-list-item:nth-child(1).reveal-active { transition-delay: 0.1s !important; }
-.elementor-element-7ef56d00 .elementor-icon-list-item:nth-child(2).reveal-active,
-.elementor-element-1018c2ab .elementor-icon-list-item:nth-child(2).reveal-active { transition-delay: 0.3s !important; }
-.elementor-element-7ef56d00 .elementor-icon-list-item:nth-child(3).reveal-active,
-.elementor-element-1018c2ab .elementor-icon-list-item:nth-child(3).reveal-active { transition-delay: 0.5s !important; }
-.elementor-element-7ef56d00 .elementor-icon-list-item:nth-child(4).reveal-active,
-.elementor-element-1018c2ab .elementor-icon-list-item:nth-child(4).reveal-active { transition-delay: 0.7s !important; }
+/* Quando o CONTAINER PAI da lista ganha a classe active, revela os filhos */
+.elementor-element-7ef56d00.reveal-active .elementor-icon-list-item,
+.elementor-element-1018c2ab.reveal-active .elementor-icon-list-item,
+.elementor-element-20b1ea80.reveal-active .elementor-icon-list-item {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
 
-/* Efeito Cascata (Staggered Delay) para a Seção 2 (Por que Acessar) */
-.elementor-element-20b1ea80 .elementor-icon-list-item:nth-child(1).reveal-active { transition-delay: 0.2s !important; }
-.elementor-element-20b1ea80 .elementor-icon-list-item:nth-child(2).reveal-active { transition-delay: 0.4s !important; }
-.elementor-element-20b1ea80 .elementor-icon-list-item:nth-child(3).reveal-active { transition-delay: 0.6s !important; }
+/* Efeito Cascata (Staggered Delay) na Seção 1 (Hero) - Revela itens um por um */
+.elementor-element-7ef56d00.reveal-active .elementor-icon-list-item:nth-child(1),
+.elementor-element-1018c2ab.reveal-active .elementor-icon-list-item:nth-child(1) { transition-delay: 0.1s !important; }
+.elementor-element-7ef56d00.reveal-active .elementor-icon-list-item:nth-child(2),
+.elementor-element-1018c2ab.reveal-active .elementor-icon-list-item:nth-child(2) { transition-delay: 0.3s !important; }
+.elementor-element-7ef56d00.reveal-active .elementor-icon-list-item:nth-child(3),
+.elementor-element-1018c2ab.reveal-active .elementor-icon-list-item:nth-child(3) { transition-delay: 0.5s !important; }
+.elementor-element-7ef56d00.reveal-active .elementor-icon-list-item:nth-child(4),
+.elementor-element-1018c2ab.reveal-active .elementor-icon-list-item:nth-child(4) { transition-delay: 0.7s !important; }
+
+/* Efeito Cascata (Staggered Delay) na Seção 2 (Por que Acessar) */
+.elementor-element-20b1ea80.reveal-active .elementor-icon-list-item:nth-child(1) { transition-delay: 0.2s !important; }
+.elementor-element-20b1ea80.reveal-active .elementor-icon-list-item:nth-child(2) { transition-delay: 0.4s !important; }
+.elementor-element-20b1ea80.reveal-active .elementor-icon-list-item:nth-child(3) { transition-delay: 0.6s !important; }
 
 
-/* Animação Contínua do Foguete (Não precisa de scroll reveal, ele flutua sempre) */
+/* Animação Contínua do Foguete (Sempre ativa) */
 @keyframes rocketFloat {
     0% { transform: translateY(0px) rotate(0deg); }
     50% { transform: translateY(-15px) rotate(4deg); }
@@ -73,36 +86,36 @@ const newScrollStyles = `
 </style>
 `;
 
-$('head').append(newScrollStyles);
+$('head').append(fixedStyles);
 
-// 3. Define and inject the IntersectionObserver script block at the end of the body
-const revealScript = `
+const fixedScript = `
 <script id="custom-scroll-reveal-script">
 document.addEventListener("DOMContentLoaded", function() {
-    // Configurações do Observador
     const observerOptions = {
-        root: null, // usa a tela inteira (viewport)
-        rootMargin: "0px 0px -80px 0px", // ativa um pouco antes de aparecer totalmente
-        threshold: 0.1 // dispara quando 10% do elemento estiver visível
+        root: null,
+        rootMargin: "0px 0px -60px 0px",
+        threshold: 0.1
     };
 
     const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add("reveal-active");
-                observer.unobserve(entry.target); // Para de observar após animar uma vez
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    // Seletores dos elementos que devem surgir suavemente ao rolar
+    // Seletores dos elementos principais.
+    // Observamos o PAI das listas (.elementor-widget-icon-list) em vez dos itens diretamente,
+    // pois o pai tem tamanho visível maior no layout garantindo o acionamento confiável.
     const elementsToReveal = [
         '.elementor-element-4827e1c7', // Título Hero Desktop
         '.elementor-element-36b75d89', // Título Hero Mobile
-        '.elementor-element-7ef56d00 .elementor-icon-list-item', // Itens Lista Hero Desktop
-        '.elementor-element-1018c2ab .elementor-icon-list-item', // Itens Lista Hero Mobile
+        '.elementor-element-7ef56d00', // Widget Lista Hero Desktop (PAI)
+        '.elementor-element-1018c2ab', // Widget Lista Hero Mobile (PAI)
         '.elementor-element-38869286', // Título Seção 2
-        '.elementor-element-20b1ea80 .elementor-icon-list-item' // Itens Lista Seção 2
+        '.elementor-element-20b1ea80'  // Widget Lista Seção 2 (PAI)
     ];
 
     elementsToReveal.forEach(selector => {
@@ -114,9 +127,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 `;
 
-// Remove previous script if it exists
-$('#custom-scroll-reveal-script').remove();
-$('body').append(revealScript);
+$('body').append(fixedScript);
 
 fs.writeFileSync('index.html', $.html());
-console.log('Successfully integrated IntersectionObserver for scroll-reveal animations!');
+console.log('Successfully fixed text descriptions reveal by targeting parent list widgets!');
