@@ -280,7 +280,16 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 
 
 
+
+
 <style id="custom-carousel-premium-styles">
+/* Garante que o container pai tenha posicionamento relativo para conter as setas absolutas */
+.elementor-image-carousel-wrapper,
+.e-n-carousel,
+.swiper {
+    position: relative !important;
+}
+
 /* Garante que as setas de navegação do Swiper fiquem visíveis, com bom contraste e cursor de clique */
 .swiper-button-next,
 .swiper-button-prev,
@@ -300,13 +309,48 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
     z-index: 100 !important;
     opacity: 1 !important;
     visibility: visible !important;
+    border: none !important;
 }
 
+/* Posiciona a seta esquerda dentro do carrossel */
+.swiper-button-prev,
+.elementor-swiper-button-prev {
+    left: 15px !important;
+    right: auto !important;
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+}
+
+/* Posiciona a seta direita dentro do carrossel */
+.swiper-button-next,
+.elementor-swiper-button-next {
+    right: 15px !important;
+    left: auto !important;
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+}
+
+/* Efeito Hover nas setas */
 .swiper-button-next:hover,
-.swiper-button-prev:hover {
-    transform: scale(1.1) !important;
+.swiper-button-prev:hover,
+.elementor-swiper-button-next:hover,
+.elementor-swiper-button-prev:hover {
+    transform: translateY(-50%) scale(1.1) !important;
     background: #1b855a !important;
     color: #ffffff !important;
+}
+
+/* Garante tamanho e cor corretos para os ícones das setas */
+.swiper-button-next svg,
+.swiper-button-prev svg,
+.elementor-swiper-button-next svg,
+.elementor-swiper-button-prev svg {
+    width: 18px !important;
+    height: 18px !important;
+    fill: currentColor !important;
+    display: block !important;
 }
 
 /* Otimização dos bullets de paginação inferior */
@@ -1501,6 +1545,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+
+
 <script id="custom-carousel-script">
 (function() {
     var configuredCount = 0;
@@ -1520,9 +1566,9 @@ document.addEventListener("DOMContentLoaded", function() {
             
             if (swiperInstance && swiperInstance.autoplay) {
                 // Configure Swiper native params for standard premium sliding carousels
-                swiperInstance.params.autoplay.delay = 4000; // Slide every 4 seconds
+                swiperInstance.params.autoplay.delay = 4000; 
                 swiperInstance.params.autoplay.disableOnInteraction = false;
-                swiperInstance.params.autoplay.pauseOnMouseEnter = true; // Safe to use with delay > 0
+                swiperInstance.params.autoplay.pauseOnMouseEnter = true; 
                 
                 // Normal transition speed and premium easing
                 swiperInstance.params.speed = 800;
