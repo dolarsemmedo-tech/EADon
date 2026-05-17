@@ -480,7 +480,107 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
     border-radius: 5px !important;
 }
 </style>
-<link id="custom-swiper-cdn-css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.css"></head>
+<link id="custom-swiper-cdn-css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.css">
+<style id="vanilla-carousel-test-style">
+  #vanilla-carousel-test-section {
+    width: 100%;
+    padding: 30px 20px;
+    box-sizing: border-box;
+    background: rgba(0,0,0,0.2);
+    border-top: 3px solid #1b855a;
+  }
+  #vanilla-carousel-test-section h3 {
+    text-align: center;
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-family: sans-serif;
+  }
+  #vanilla-carousel-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+  #vanilla-carousel-btn-prev,
+  #vanilla-carousel-btn-next {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: white;
+    color: #1b855a;
+    border: none;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: background 0.2s, color 0.2s;
+    line-height: 1;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  #vanilla-carousel-btn-prev:hover,
+  #vanilla-carousel-btn-next:hover {
+    background: #1b855a;
+    color: white;
+  }
+  #vanilla-carousel-track-outer {
+    flex: 1;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+  #vanilla-carousel-track {
+    display: flex;
+    gap: 15px;
+    transition: transform 0.4s ease;
+    will-change: transform;
+  }
+  .vanilla-slide {
+    flex-shrink: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  }
+  .vanilla-slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+  }
+  #vanilla-carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .vanilla-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+  }
+  .vanilla-dot.active {
+    background: #1b855a;
+    width: 24px;
+    border-radius: 5px;
+  }
+  @media (max-width: 768px) {
+    #vanilla-carousel-btn-prev,
+    #vanilla-carousel-btn-next {
+      width: 36px;
+      height: 36px;
+      font-size: 18px;
+    }
+  }
+</style>
+</head>
 <body data-rsssl="1" class="home wp-singular page-template page-template-elementor_canvas page page-id-14 wp-embed-responsive wp-theme-hello-elementor hello-elementor-default elementor-default elementor-template-canvas elementor-kit-6 elementor-page elementor-page-14">
 			<div data-elementor-type="wp-page" data-elementor-id="14" class="elementor elementor-14" data-elementor-post-type="page">
 				<div class="elementor-element elementor-element-37c32b63 e-flex e-con-boxed e-con e-parent" data-id="37c32b63" data-element_type="container" data-e-type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
@@ -742,6 +842,36 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 									</div>
 						</div>
 				</div>
+<section id="vanilla-carousel-test-section">
+  <h3>🧪 Carrossel de Teste (Vanilla JS — sem Swiper)</h3>
+  <div id="vanilla-carousel-wrapper">
+    <button id="vanilla-carousel-btn-prev" aria-label="Anterior">‹</button>
+    <div id="vanilla-carousel-track-outer">
+      <div id="vanilla-carousel-track">
+        <div class="vanilla-slide"><img src="wp-content/uploads/2026/04/tecnicos.jpg" alt="Cursos Técnicos" loading="lazy"></div>
+<div class="vanilla-slide"><img src="wp-content/uploads/2026/05/eja.jpg" alt="Cursos de EJA" loading="lazy"></div>
+<div class="vanilla-slide"><img src="wp-content/uploads/2026/04/graduacao.jpg" alt="Cursos de Graduação" loading="lazy"></div>
+<div class="vanilla-slide"><img src="wp-content/uploads/2026/04/pos.jpg" alt="Pós-Graduação" loading="lazy"></div>
+<div class="vanilla-slide"><img src="wp-content/uploads/2026/04/segunda-licenciatura.jpg" alt="Segunda Licenciatura" loading="lazy"></div>
+<div class="vanilla-slide"><img src="wp-content/uploads/2026/04/nrs.jpg" alt="Cursos de NRs" loading="lazy"></div>
+<div class="vanilla-slide"><img src="wp-content/uploads/2026/04/transito.jpg" alt="Trânsito" loading="lazy"></div>
+<div class="vanilla-slide"><img src="wp-content/uploads/2026/04/certificacao-por-competencia.jpg" alt="Certificação por Competência" loading="lazy"></div>
+      </div>
+    </div>
+    <button id="vanilla-carousel-btn-next" aria-label="Próximo">›</button>
+  </div>
+  <div id="vanilla-carousel-dots">
+    <button class="vanilla-dot active" data-index="0" aria-label="Slide 1"></button>
+<button class="vanilla-dot" data-index="1" aria-label="Slide 2"></button>
+<button class="vanilla-dot" data-index="2" aria-label="Slide 3"></button>
+<button class="vanilla-dot" data-index="3" aria-label="Slide 4"></button>
+<button class="vanilla-dot" data-index="4" aria-label="Slide 5"></button>
+<button class="vanilla-dot" data-index="5" aria-label="Slide 6"></button>
+<button class="vanilla-dot" data-index="6" aria-label="Slide 7"></button>
+<button class="vanilla-dot" data-index="7" aria-label="Slide 8"></button>
+  </div>
+</section>
+
 <div class="custom-swiper-outer-container">
     <div class="custom-swiper-navigation-wrapper">
         <!-- Left chevron outside the swiper slider -->
@@ -1828,6 +1958,116 @@ document.addEventListener("DOMContentLoaded", function() {
     }, 50);
     
     window.addEventListener('load', initCustomSwiper);
+})();
+</script>
+
+<script id="vanilla-carousel-test-script">
+(function() {
+  // Wait for DOM to be ready
+  function ready(fn) {
+    if (document.readyState !== 'loading') {
+      fn();
+    } else {
+      document.addEventListener('DOMContentLoaded', fn);
+    }
+  }
+
+  ready(function() {
+    var track = document.getElementById('vanilla-carousel-track');
+    var outer = document.getElementById('vanilla-carousel-track-outer');
+    var btnPrev = document.getElementById('vanilla-carousel-btn-prev');
+    var btnNext = document.getElementById('vanilla-carousel-btn-next');
+    var dots = document.querySelectorAll('.vanilla-dot');
+    var slides = document.querySelectorAll('.vanilla-slide');
+
+    if (!track || !outer || !btnPrev || !btnNext) {
+      console.error('[VanillaCarousel] Elements not found!');
+      return;
+    }
+
+    console.log('[VanillaCarousel] Initializing with', slides.length, 'slides.');
+
+    var currentIndex = 0;
+    var visibleCount = 4; // desktop default
+
+    function getSlidesVisible() {
+      return window.innerWidth <= 768 ? 3 : 4;
+    }
+
+    function getSlideWidth() {
+      var gap = 15;
+      var count = getSlidesVisible();
+      return (outer.offsetWidth - (gap * (count - 1))) / count;
+    }
+
+    function setSlideWidths() {
+      var w = getSlideWidth();
+      slides.forEach(function(slide) {
+        slide.style.width = w + 'px';
+      });
+    }
+
+    function getMaxIndex() {
+      return Math.max(0, slides.length - getSlidesVisible());
+    }
+
+    function goTo(index) {
+      var max = getMaxIndex();
+      if (index < 0) index = max;
+      if (index > max) index = 0;
+      currentIndex = index;
+
+      var slideW = getSlideWidth();
+      var gap = 15;
+      var offset = currentIndex * (slideW + gap);
+      track.style.transform = 'translateX(-' + offset + 'px)';
+
+      dots.forEach(function(dot, i) {
+        dot.classList.toggle('active', i === currentIndex);
+      });
+
+      console.log('[VanillaCarousel] Moved to slide', currentIndex);
+    }
+
+    function next() { goTo(currentIndex + 1); }
+    function prev() { goTo(currentIndex - 1); }
+
+    btnNext.addEventListener('click', function() {
+      console.log('[VanillaCarousel] Next clicked');
+      next();
+    });
+
+    btnPrev.addEventListener('click', function() {
+      console.log('[VanillaCarousel] Prev clicked');
+      prev();
+    });
+
+    dots.forEach(function(dot) {
+      dot.addEventListener('click', function() {
+        goTo(parseInt(this.getAttribute('data-index')));
+      });
+    });
+
+    // Autoplay every 4 seconds
+    var autoplayInterval = setInterval(next, 4000);
+
+    // Pause autoplay on hover
+    outer.addEventListener('mouseenter', function() { clearInterval(autoplayInterval); });
+    outer.addEventListener('mouseleave', function() {
+      autoplayInterval = setInterval(next, 4000);
+    });
+
+    // Handle resize
+    window.addEventListener('resize', function() {
+      setSlideWidths();
+      goTo(currentIndex);
+    });
+
+    // Init
+    setSlideWidths();
+    goTo(0);
+    console.log('[VanillaCarousel] Ready!');
+  });
 })();
 </script>
 </body></html>
