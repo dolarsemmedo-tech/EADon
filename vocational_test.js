@@ -10,7 +10,7 @@
   // Configuration
   // Set your Google Sheets Web App URL here. 
   // If empty, the system will save leads locally to localStorage as a fallback.
-  const GOOGLE_SHEETS_WEBHOOK_URL = ""; 
+  const GOOGLE_SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwk6BRBPsDJgvy7wRE_8G5l-aLxPqBLB55g_87Vq0OSrmWvdCRO2j4RdCw4dV9hwXzspw/exec"; 
 
   // 32-Question Database mapped to the 8 Intelligences
   const questions = [
