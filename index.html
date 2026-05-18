@@ -570,6 +570,104 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
     width: 26px;
     border-radius: 5px;
   }
+
+  /* ── Terceiro carrossel vanilla (Histórias de Sucesso) ── */
+  #vc3-section {
+    width: 100%;
+    padding: 0 0 32px 0;
+    box-sizing: border-box;
+  }
+  #vc3-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 0;
+  }
+  #vc3-btn-prev,
+  #vc3-btn-next {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.92);
+    color: #1b855a;
+    border: none;
+    font-size: 26px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.22);
+    transition: background 0.25s, color 0.25s, transform 0.2s;
+    user-select: none;
+    -webkit-user-select: none;
+    line-height: 1;
+    z-index: 10;
+  }
+  #vc3-btn-prev { margin-right: 12px; }
+  #vc3-btn-next { margin-left: 12px; }
+  #vc3-btn-prev:hover,
+  #vc3-btn-next:hover {
+    background: #1b855a;
+    color: #fff;
+    transform: scale(1.1);
+  }
+  #vc3-btn-prev:active,
+  #vc3-btn-next:active {
+    transform: scale(0.96);
+  }
+  #vc3-track-outer {
+    flex: 1;
+    overflow: hidden;
+    border-radius: 14px;
+  }
+  #vc3-track {
+    display: flex;
+    gap: 16px;
+    transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+  }
+  .vc3-slide {
+    flex-shrink: 0;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.28);
+    border-bottom: 4px solid #1b855a;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .vc3-slide:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(27,133,90,0.3);
+  }
+  .vc3-slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 14px 14px 0 0;
+  }
+  #vc3-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  .vc3-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.35);
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    transition: all 0.3s;
+  }
+  .vc3-dot.active {
+    background: #1b855a;
+    width: 26px;
+    border-radius: 5px;
+  }
 </style>
 </head>
 <body data-rsssl="1" class="home wp-singular page-template page-template-elementor_canvas page page-id-14 wp-embed-responsive wp-theme-hello-elementor hello-elementor-default elementor-default elementor-template-canvas elementor-kit-6 elementor-page elementor-page-14">
@@ -1279,113 +1377,34 @@ alta no mercado.					</p>
 				<div class="elementor-widget-container">
 									<p>Alguns alunos que tiveram suas vidas transformadas</p>								</div>
 				</div>
-		<div class="elementor-element elementor-element-5cb02ceb e-grid e-con-full e-con e-child" data-id="5cb02ceb" data-element_type="container" data-e-type="container">
-		<div class="elementor-element elementor-element-6cc6ee34 e-con-full e-flex e-con e-child" data-id="6cc6ee34" data-element_type="container" data-e-type="container">
-				<div class="elementor-element elementor-element-253b26e elementor-pagination-type-bullets elementor-arrows-position-inside elementor-pagination-position-outside elementor-widget elementor-widget-n-carousel" data-id="253b26e" data-element_type="widget" data-e-type="widget" data-settings="{&quot;carousel_items&quot;:[{&quot;slide_title&quot;:&quot;Slide #1&quot;,&quot;_id&quot;:&quot;d66b16d&quot;},{&quot;slide_title&quot;:&quot;Slide #2&quot;,&quot;_id&quot;:&quot;7434b87&quot;},{&quot;slide_title&quot;:&quot;Slide #3&quot;,&quot;_id&quot;:&quot;c2ea604&quot;},{&quot;slide_title&quot;:&quot;Slide #3&quot;,&quot;_id&quot;:&quot;1628821&quot;},{&quot;slide_title&quot;:&quot;Slide #3&quot;,&quot;_id&quot;:&quot;9e47a6d&quot;},{&quot;slide_title&quot;:&quot;Slide #3&quot;,&quot;_id&quot;:&quot;9d2153c&quot;},{&quot;slide_title&quot;:&quot;Slide #3&quot;,&quot;_id&quot;:&quot;6b7a63f&quot;},{&quot;slide_title&quot;:&quot;Slide #3&quot;,&quot;_id&quot;:&quot;2f8dd3b&quot;}],&quot;slides_to_show_tablet&quot;:&quot;2&quot;,&quot;slides_to_show_mobile&quot;:&quot;1&quot;,&quot;infinite&quot;:&quot;yes&quot;,&quot;speed&quot;:800,&quot;offset_sides&quot;:&quot;none&quot;,&quot;arrows&quot;:&quot;yes&quot;,&quot;pagination&quot;:&quot;bullets&quot;,&quot;image_spacing_custom&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:10,&quot;sizes&quot;:[]},&quot;image_spacing_custom_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;image_spacing_custom_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;autoplay&quot;:&quot;yes&quot;,&quot;autoplay_speed&quot;:4000,&quot;pause_on_hover&quot;:&quot;yes&quot;,&quot;pause_on_interaction&quot;:&quot;no&quot;}" data-widget_type="nested-carousel.default">
-				<div class="elementor-widget-container">
-							<div class="e-n-carousel swiper" role="region" aria-roledescription="carousel" aria-label="Carousel" dir="ltr">
-			<div class="swiper-wrapper" aria-live="polite">
-										<div class="swiper-slide" data-slide="1" role="group" aria-roledescription="slide" aria-label="1 of 8">
-							<div class="elementor-element elementor-element-1cda6bad e-flex e-con-boxed e-con e-child" data-id="1cda6bad" data-element_type="container" data-e-type="container">
-					<div class="e-con-inner">
-				<div class="elementor-element elementor-element-66a29078 elementor-widget elementor-widget-image" data-id="66a29078" data-element_type="widget" data-e-type="widget" data-widget_type="image.default">
-				<div class="elementor-widget-container">
-															<img decoding="async" width="800" height="800" src="wp-content/uploads/2026/04/1-1-1024x1024.jpg" class="attachment-large size-large wp-image-57" alt="" srcset="wp-content/uploads/2026/04/1-1-1024x1024.jpg 1024w, wp-content/uploads/2026/04/1-1-300x300.jpg 300w, wp-content/uploads/2026/04/1-1-150x150.jpg 150w, wp-content/uploads/2026/04/1-1-768x768.jpg 768w, wp-content/uploads/2026/04/1-1.jpg 1080w" sizes="(max-width: 800px) 100vw, 800px">															</div>
-				</div>
-					</div>
-				</div>
-								</div>
-											<div class="swiper-slide" data-slide="2" role="group" aria-roledescription="slide" aria-label="2 of 8">
-							<div class="elementor-element elementor-element-6f7a1dfb e-flex e-con-boxed e-con e-child" data-id="6f7a1dfb" data-element_type="container" data-e-type="container">
-					<div class="e-con-inner">
-				<div class="elementor-element elementor-element-46f86e5f elementor-widget elementor-widget-image" data-id="46f86e5f" data-element_type="widget" data-e-type="widget" data-widget_type="image.default">
-				<div class="elementor-widget-container">
-															<img loading="lazy" decoding="async" width="800" height="800" src="wp-content/uploads/2026/04/3-2-1024x1024.jpg" class="attachment-large size-large wp-image-58" alt="" srcset="wp-content/uploads/2026/04/3-2-1024x1024.jpg 1024w, wp-content/uploads/2026/04/3-2-300x300.jpg 300w, wp-content/uploads/2026/04/3-2-150x150.jpg 150w, wp-content/uploads/2026/04/3-2-768x768.jpg 768w, wp-content/uploads/2026/04/3-2.jpg 1080w" sizes="(max-width: 800px) 100vw, 800px">															</div>
-				</div>
-					</div>
-				</div>
-								</div>
-											<div class="swiper-slide" data-slide="3" role="group" aria-roledescription="slide" aria-label="3 of 8">
-							<div class="elementor-element elementor-element-36b6f82e e-flex e-con-boxed e-con e-child" data-id="36b6f82e" data-element_type="container" data-e-type="container">
-					<div class="e-con-inner">
-				<div class="elementor-element elementor-element-2d3b3469 elementor-widget elementor-widget-image" data-id="2d3b3469" data-element_type="widget" data-e-type="widget" data-widget_type="image.default">
-				<div class="elementor-widget-container">
-															<img loading="lazy" decoding="async" width="800" height="800" src="wp-content/uploads/2026/04/4-2-1024x1024.jpg" class="attachment-large size-large wp-image-59" alt="" srcset="wp-content/uploads/2026/04/4-2-1024x1024.jpg 1024w, wp-content/uploads/2026/04/4-2-300x300.jpg 300w, wp-content/uploads/2026/04/4-2-150x150.jpg 150w, wp-content/uploads/2026/04/4-2-768x768.jpg 768w, wp-content/uploads/2026/04/4-2.jpg 1080w" sizes="(max-width: 800px) 100vw, 800px">															</div>
-				</div>
-					</div>
-				</div>
-								</div>
-											<div class="swiper-slide" data-slide="4" role="group" aria-roledescription="slide" aria-label="4 of 8">
-							<div class="elementor-element elementor-element-2f3c9dee e-flex e-con-boxed e-con e-child" data-id="2f3c9dee" data-element_type="container" data-e-type="container">
-					<div class="e-con-inner">
-		<div class="elementor-element elementor-element-74680cc9 e-con-full e-flex e-con e-child" data-id="74680cc9" data-element_type="container" data-e-type="container">
-				<div class="elementor-element elementor-element-7364016b elementor-widget elementor-widget-image" data-id="7364016b" data-element_type="widget" data-e-type="widget" data-widget_type="image.default">
-				<div class="elementor-widget-container">
-															<img loading="lazy" decoding="async" width="800" height="800" src="wp-content/uploads/2026/04/9-1024x1024.jpg" class="attachment-large size-large wp-image-60" alt="" srcset="wp-content/uploads/2026/04/9-1024x1024.jpg 1024w, wp-content/uploads/2026/04/9-300x300.jpg 300w, wp-content/uploads/2026/04/9-150x150.jpg 150w, wp-content/uploads/2026/04/9-768x768.jpg 768w, wp-content/uploads/2026/04/9.jpg 1080w" sizes="(max-width: 800px) 100vw, 800px">															</div>
-				</div>
-				</div>
-					</div>
-				</div>
-								</div>
-											<div class="swiper-slide" data-slide="5" role="group" aria-roledescription="slide" aria-label="5 of 8">
-							<div class="elementor-element elementor-element-317bcb10 e-flex e-con-boxed e-con e-child" data-id="317bcb10" data-element_type="container" data-e-type="container">
-					<div class="e-con-inner">
-		<div class="elementor-element elementor-element-531b425c e-con-full e-flex e-con e-child" data-id="531b425c" data-element_type="container" data-e-type="container">
-				<div class="elementor-element elementor-element-13f77bda elementor-widget elementor-widget-image" data-id="13f77bda" data-element_type="widget" data-e-type="widget" data-widget_type="image.default">
-				<div class="elementor-widget-container">
-															<img loading="lazy" decoding="async" width="800" height="800" src="wp-content/uploads/2026/04/6-1024x1024.jpg" class="attachment-large size-large wp-image-61" alt="" srcset="wp-content/uploads/2026/04/6-1024x1024.jpg 1024w, wp-content/uploads/2026/04/6-300x300.jpg 300w, wp-content/uploads/2026/04/6-150x150.jpg 150w, wp-content/uploads/2026/04/6-768x768.jpg 768w, wp-content/uploads/2026/04/6.jpg 1080w" sizes="(max-width: 800px) 100vw, 800px">															</div>
-				</div>
-				</div>
-					</div>
-				</div>
-								</div>
-											<div class="swiper-slide" data-slide="6" role="group" aria-roledescription="slide" aria-label="6 of 8">
-							<div class="elementor-element elementor-element-40347bae e-flex e-con-boxed e-con e-child" data-id="40347bae" data-element_type="container" data-e-type="container">
-					<div class="e-con-inner">
-		<div class="elementor-element elementor-element-28b42be9 e-con-full e-flex e-con e-child" data-id="28b42be9" data-element_type="container" data-e-type="container">
-				<div class="elementor-element elementor-element-73b84255 elementor-widget elementor-widget-image" data-id="73b84255" data-element_type="widget" data-e-type="widget" data-widget_type="image.default">
-				<div class="elementor-widget-container">
-															<img loading="lazy" decoding="async" width="800" height="800" src="wp-content/uploads/2026/04/14-1024x1024.jpg" class="attachment-large size-large wp-image-62" alt="" srcset="wp-content/uploads/2026/04/14-1024x1024.jpg 1024w, wp-content/uploads/2026/04/14-300x300.jpg 300w, wp-content/uploads/2026/04/14-150x150.jpg 150w, wp-content/uploads/2026/04/14-768x768.jpg 768w, wp-content/uploads/2026/04/14.jpg 1080w" sizes="(max-width: 800px) 100vw, 800px">															</div>
-				</div>
-				</div>
-					</div>
-				</div>
-								</div>
-											<div class="swiper-slide" data-slide="7" role="group" aria-roledescription="slide" aria-label="7 of 8">
-							<div class="elementor-element elementor-element-536e798 e-flex e-con-boxed e-con e-child" data-id="536e798" data-element_type="container" data-e-type="container">
-					<div class="e-con-inner">
-		<div class="elementor-element elementor-element-38766310 e-con-full e-flex e-con e-child" data-id="38766310" data-element_type="container" data-e-type="container">
-				<div class="elementor-element elementor-element-35f4ca5 elementor-widget elementor-widget-image" data-id="35f4ca5" data-element_type="widget" data-e-type="widget" data-widget_type="image.default">
-				<div class="elementor-widget-container">
-															<img loading="lazy" decoding="async" width="800" height="800" src="wp-content/uploads/2026/04/11-1024x1024.jpg" class="attachment-large size-large wp-image-63" alt="" srcset="wp-content/uploads/2026/04/11-1024x1024.jpg 1024w, wp-content/uploads/2026/04/11-300x300.jpg 300w, wp-content/uploads/2026/04/11-150x150.jpg 150w, wp-content/uploads/2026/04/11-768x768.jpg 768w, wp-content/uploads/2026/04/11.jpg 1080w" sizes="(max-width: 800px) 100vw, 800px">															</div>
-				</div>
-				</div>
-					</div>
-				</div>
-								</div>
-											<div class="swiper-slide" data-slide="8" role="group" aria-roledescription="slide" aria-label="8 of 8">
-							<div class="elementor-element elementor-element-32554f10 e-flex e-con-boxed e-con e-child" data-id="32554f10" data-element_type="container" data-e-type="container">
-					<div class="e-con-inner">
-		<div class="elementor-element elementor-element-1d82285 e-con-full e-flex e-con e-child" data-id="1d82285" data-element_type="container" data-e-type="container">
-				<div class="elementor-element elementor-element-2a28aa7f elementor-widget elementor-widget-image" data-id="2a28aa7f" data-element_type="widget" data-e-type="widget" data-widget_type="image.default">
-				<div class="elementor-widget-container">
-															<img loading="lazy" decoding="async" width="800" height="800" src="wp-content/uploads/2026/04/10-1024x1024.jpg" class="attachment-large size-large wp-image-23" alt="" srcset="wp-content/uploads/2026/04/10-1024x1024.jpg 1024w, wp-content/uploads/2026/04/10-300x300.jpg 300w, wp-content/uploads/2026/04/10-150x150.jpg 150w, wp-content/uploads/2026/04/10-768x768.jpg 768w, wp-content/uploads/2026/04/10.jpg 1080w" sizes="(max-width: 800px) 100vw, 800px">															</div>
-				</div>
-				</div>
-					</div>
-				</div>
-								</div>
-								</div>
-		</div>
-					<div class="elementor-swiper-button elementor-swiper-button-prev" role="button" tabindex="0" aria-label="Previous">
-				<svg aria-hidden="true" class="e-font-icon-svg e-eicon-chevron-left" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg"><path d="M646 125C629 125 613 133 604 142L308 442C296 454 292 471 292 487 292 504 296 521 308 533L604 854C617 867 629 875 646 875 663 875 679 871 692 858 704 846 713 829 713 812 713 796 708 779 692 767L438 487 692 225C700 217 708 204 708 187 708 171 704 154 692 142 675 129 663 125 646 125Z"></path></svg>			</div>
-			<div class="elementor-swiper-button elementor-swiper-button-next" role="button" tabindex="0" aria-label="Next">
-				<svg aria-hidden="true" class="e-font-icon-svg e-eicon-chevron-right" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg"><path d="M696 533C708 521 713 504 713 487 713 471 708 454 696 446L400 146C388 133 375 125 354 125 338 125 325 129 313 142 300 154 292 171 292 187 292 204 296 221 308 233L563 492 304 771C292 783 288 800 288 817 288 833 296 850 308 863 321 871 338 875 354 875 371 875 388 867 400 854L696 533Z"></path></svg>			</div>
-					<div class="swiper-pagination"></div>
-						</div>
-				</div>
-				</div>
-				</div>
+<div id="vc3-section">
+  <div id="vc3-wrapper">
+    <button id="vc3-btn-prev" aria-label="Anterior">&#8249;</button>
+    <div id="vc3-track-outer">
+      <div id="vc3-track">
+        <div class="vc3-slide"><img src="wp-content/uploads/2026/04/1-1-1024x1024.jpg" alt="História de Sucesso 1" loading="lazy"></div>
+        <div class="vc3-slide"><img src="wp-content/uploads/2026/04/3-2-1024x1024.jpg" alt="História de Sucesso 2" loading="lazy"></div>
+        <div class="vc3-slide"><img src="wp-content/uploads/2026/04/4-2-1024x1024.jpg" alt="História de Sucesso 3" loading="lazy"></div>
+        <div class="vc3-slide"><img src="wp-content/uploads/2026/04/9-1024x1024.jpg" alt="História de Sucesso 4" loading="lazy"></div>
+        <div class="vc3-slide"><img src="wp-content/uploads/2026/04/6-1024x1024.jpg" alt="História de Sucesso 5" loading="lazy"></div>
+        <div class="vc3-slide"><img src="wp-content/uploads/2026/04/14-1024x1024.jpg" alt="História de Sucesso 6" loading="lazy"></div>
+        <div class="vc3-slide"><img src="wp-content/uploads/2026/04/11-1024x1024.jpg" alt="História de Sucesso 7" loading="lazy"></div>
+        <div class="vc3-slide"><img src="wp-content/uploads/2026/04/10-1024x1024.jpg" alt="História de Sucesso 8" loading="lazy"></div>
+      </div>
+    </div>
+    <button id="vc3-btn-next" aria-label="Próximo">&#8250;</button>
+  </div>
+  <div id="vc3-dots">
+    <button class="vc3-dot active" data-index="0" aria-label="Ir para slide 1"></button>
+    <button class="vc3-dot" data-index="1" aria-label="Ir para slide 2"></button>
+    <button class="vc3-dot" data-index="2" aria-label="Ir para slide 3"></button>
+    <button class="vc3-dot" data-index="3" aria-label="Ir para slide 4"></button>
+    <button class="vc3-dot" data-index="4" aria-label="Ir para slide 5"></button>
+    <button class="vc3-dot" data-index="5" aria-label="Ir para slide 6"></button>
+    <button class="vc3-dot" data-index="6" aria-label="Ir para slide 7"></button>
+    <button class="vc3-dot" data-index="7" aria-label="Ir para slide 8"></button>
+  </div>
+</div>
 				<div class="elementor-element elementor-element-bec97d8 elementor-align-center elementor-mobile-align-justify elementor-widget elementor-widget-button" data-id="bec97d8" data-element_type="widget" data-e-type="widget" data-widget_type="button.default">
 				<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
@@ -2031,6 +2050,78 @@ document.addEventListener("DOMContentLoaded", function() {
     document.addEventListener('DOMContentLoaded', init2);
   } else {
     init2();
+  }
+})();
+</script>
+<script id="vanilla-carousel3-script">
+(function() {
+  function init3() {
+    var track   = document.getElementById('vc3-track');
+    var outer   = document.getElementById('vc3-track-outer');
+    var btnPrev = document.getElementById('vc3-btn-prev');
+    var btnNext = document.getElementById('vc3-btn-next');
+    var dots    = document.querySelectorAll('.vc3-dot');
+    var slides  = document.querySelectorAll('.vc3-slide');
+
+    if (!track || !outer || !btnPrev || !btnNext || slides.length === 0) {
+      setTimeout(init3, 100);
+      return;
+    }
+
+    var GAP = 16;
+    var current = 0;
+
+    function visible() { return window.innerWidth <= 768 ? 2 : 4; }
+
+    function slideW() {
+      var v = visible();
+      return (outer.offsetWidth - GAP * (v - 1)) / v;
+    }
+
+    function setSizes() {
+      var w = slideW();
+      slides.forEach(function(s) { s.style.width = w + 'px'; });
+    }
+
+    function maxIdx() { return Math.max(0, slides.length - visible()); }
+
+    function goTo(idx) {
+      if (idx < 0)        idx = maxIdx();
+      if (idx > maxIdx()) idx = 0;
+      current = idx;
+      var offset = current * (slideW() + GAP);
+      track.style.transform = 'translateX(-' + offset + 'px)';
+      dots.forEach(function(d, i) {
+        d.classList.toggle('active', i === current);
+      });
+    }
+
+    btnNext.addEventListener('click', function() { goTo(current + 1); });
+    btnPrev.addEventListener('click', function() { goTo(current - 1); });
+    dots.forEach(function(d) {
+      d.addEventListener('click', function() {
+        goTo(parseInt(this.getAttribute('data-index'), 10));
+      });
+    });
+
+    var timer3 = setInterval(function() { goTo(current + 1); }, 4000);
+    outer.addEventListener('mouseenter', function() { clearInterval(timer3); });
+    outer.addEventListener('mouseleave', function() {
+      clearInterval(timer3);
+      timer3 = setInterval(function() { goTo(current + 1); }, 4000);
+    });
+
+    window.addEventListener('resize', function() { setSizes(); goTo(current); });
+
+    setSizes();
+    goTo(0);
+    console.log('[VanillaCarousel3] Initialized successfully with', slides.length, 'slides.');
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init3);
+  } else {
+    init3();
   }
 })();
 </script>
