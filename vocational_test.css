@@ -29,15 +29,128 @@
   animation: vt-float 6s ease-in-out infinite;
 }
 
+/* Teaser Section Classes for Perfect Mobile Responsiveness */
+.vt-teaser-section {
+  background: #FFFFFF !important;
+  padding: 90px 24px !important;
+  position: relative !important;
+  overflow: hidden !important;
+  border-top: 1px solid #E2E8F0 !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+}
+
+.vt-teaser-inner {
+  max-width: 1000px !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  position: relative !important;
+  z-index: 2 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+}
+
+.vt-teaser-title {
+  font-family: 'Work Sans', sans-serif !important;
+  font-size: 44px !important;
+  font-weight: 800 !important;
+  color: #0A1629 !important;
+  line-height: 1.25 !important;
+  margin: 0 auto 20px auto !important;
+  letter-spacing: -1.5px !important;
+  max-width: 900px !important;
+  box-sizing: border-box !important;
+}
+
+.vt-teaser-desc {
+  font-family: 'Work Sans', sans-serif !important;
+  font-size: 19px !important;
+  font-weight: 500 !important;
+  color: #5C6B82 !important;
+  max-width: 800px !important;
+  line-height: 1.6 !important;
+  margin: 0 auto 40px auto !important;
+  box-sizing: border-box !important;
+}
+
+.vt-teaser-btn-wrapper {
+  display: inline-block !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  width: auto !important;
+}
+
 #btn-iniciar-teste-vocacional {
-  animation: vt-pulse-glow 3s infinite;
+  font-family: 'Work Sans', sans-serif !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  color: #FFFFFF !important;
+  background-image: linear-gradient(180deg, #F37610 0%, #FF9901 100%) !important;
+  border: none !important;
+  padding: 20px 56px !important;
+  border-radius: 50px !important;
+  cursor: pointer !important;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  box-shadow: 0 10px 30px rgba(243, 118, 16, 0.3) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  animation: vt-pulse-glow 3s infinite;
 }
 
 #btn-iniciar-teste-vocacional:hover {
   transform: translateY(-3px) scale(1.02) !important;
   filter: brightness(1.1);
   box-shadow: 0 12px 30px rgba(243, 118, 16, 0.4) !important;
+}
+
+/* Responsive Mobile Rules to Prevent Viewport Stretch and Gaps */
+@media (max-width: 768px) {
+  .vt-teaser-section {
+    padding: 60px 16px !important;
+  }
+  
+  .vt-teaser-title {
+    font-size: 28px !important;
+    letter-spacing: -0.5px !important;
+    margin-bottom: 16px !important;
+    padding: 0 8px !important;
+  }
+
+  .vt-teaser-desc {
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 30px !important;
+    padding: 0 12px !important;
+  }
+
+  .vt-teaser-btn-wrapper {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+  }
+
+  #btn-iniciar-teste-vocacional {
+    font-size: 16px !important;
+    padding: 16px 24px !important;
+    width: 100% !important;
+    max-width: 320px !important;
+    margin: 0 auto !important;
+  }
+  
+  .vt-info-details {
+    margin-top: 30px !important;
+  }
 }
 
 .vocational-features-grid .feat-card:hover {
