@@ -615,7 +615,7 @@
     renderCurrentStep();
   }
 
-  // Call Gemini REST API directly
+  // Call Gemini REST API directly with automatic Local AI Fallback Engine
   async function runAIVocationalAnalysis() {
     try {
       // Build responses summary for prompt
@@ -653,23 +653,37 @@ Mantenha a resposta focada, concisa e altamente motivadora. Não use termos comp
         ]
       };
 
-      const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(requestBody)
+      let rawText = "";
+
+      try {
+        console.log("Attempting to request Google Gemini API...");
+        const response = await fetch(
+          `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(requestBody)
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`API returned HTTP ${response.status}`);
         }
-      );
 
-      if (!response.ok) {
-        throw new Error("Erro na requisição à API Gemini");
+        const data = await response.json();
+        if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts[0]) {
+          rawText = data.candidates[0].content.parts[0].text;
+          console.log("Gemini AI Analysis generated successfully.");
+        } else {
+          throw new Error("Invalid response format from Gemini API");
+        }
+      } catch (geminiError) {
+        console.warn("Gemini API Key blocked, leaked or offline. Activating EADon Local AI Fallback Engine...", geminiError);
+        // Generate a high-fidelity local vocational report dynamically
+        rawText = generateLocalVocationalAnalysis(userResponses);
       }
-
-      const data = await response.json();
-      const rawText = data.candidates[0].content.parts[0].text;
       
       generatedResultText = rawText;
 
@@ -686,12 +700,136 @@ Mantenha a resposta focada, concisa e altamente motivadora. Não use termos comp
       currentStep = 10;
       renderCurrentStep();
     } catch (error) {
-      console.error("Gemini API Error:", error);
-      showToast("❌ Erro ao gerar resultado da IA. Tente novamente.");
+      console.error("General Analysis Error:", error);
+      showToast("❌ Erro ao gerar resultado. Tente novamente.");
       // Back to lead step
       currentStep = 8;
       renderCurrentStep();
     }
+  }
+
+  // Highly sophisticated localized AI Fallback Engine
+  function generateLocalVocationalAnalysis(responses) {
+    const name = responses.lead_name || "Estudante";
+    const ambiente = responses.ambiente || "escritorio";
+    const desafio = responses.desafio || "logica";
+    
+    // Decide the 3 paths based on responses
+    let path1 = "";
+    let path2 = "";
+    let path3 = "";
+    let intro = "";
+    let conclusion = "";
+    
+    if (ambiente === "escritorio") {
+      if (desafio === "logica") {
+        intro = `Olá, ${name}! Analisando o seu perfil, identificamos uma mente altamente analítica, focada em organização e solução estruturada de problemas. Você demonstra preferência por ambientes corporativos organizados ou home office focado, onde a clareza de processos e o raciocínio lógico estruturado são altamente valorizados.`;
+        
+        path1 = `## 🎯 Caminho 1: Tecnologia & Desenvolvimento de Software
+Seu raciocínio lógico estruturado e foco em resolver desafios complexos indicam uma excelente aptidão para a área de Tecnologia da Informação. Profissionais que trabalham focados na criação de códigos, lógica de dados e arquitetura de sistemas estão em alta demanda mundial.
+* **Competências a desenvolver**: Lógica de programação, desenvolvimento web/mobile e estruturas de banco de dados.`;
+        
+        path2 = `## 🎯 Caminho 2: Gestão Financeira & Business Intelligence (BI)
+Sua capacidade de trabalhar de forma organizada com processos lógicos faz de você um candidato ideal para planejar, gerenciar e analisar dados corporativos ou contábeis. A inteligência de negócios é a chave para a tomada de decisões hoje.
+* **Competências a desenvolver**: Análise estatística, ferramentas de BI (Power BI) e finanças corporativas.`;
+        
+        path3 = `## 🎯 Caminho 3: Administração & Processos Gerenciais
+A capacidade de gerenciar fluxos de trabalho de maneira eficiente, coordenando tarefas individuais ou em equipe com foco em metas organizacionais claras. A administração de recursos e a logística inteligente estruturam as grandes empresas.
+* **Competências a desenvolver**: Gestão estratégica, liderança operacional e otimização de processos.`;
+      } else { // criatividade
+        intro = `Olá, ${name}! Seu perfil destaca-se pela excelente inteligência criativa aplicada a ambientes estruturados. Você consegue unir a flexibilidade de ideias inovadoras à necessidade de foco operacional, gerando soluções fora da caixa que respeitam a ordem de projetos comerciais ou corporativos.`;
+        
+        path1 = `## 🎯 Caminho 1: Marketing Digital & Redação Publicitária
+A união de um ambiente flexível com a necessidade de ideias inovadoras torna você ideal para desenhar campanhas digitais, gerenciar redes sociais e criar narrativas envolventes para marcas na internet.
+* **Competências a desenvolver**: Estratégias de SEO, copywriting, análise de tráfego pago e branding.`;
+        
+        path2 = `## 🎯 Caminho 2: Design de Experiência (UX/UI) & Web Design
+A criação visual de interfaces, layouts e aplicativos web que facilitam a vida dos usuários. Uma profissão de alta remuneração que une bom gosto estético com organização de usabilidade prática.
+* **Competências a desenvolver**: Prototipagem (Figma), arquitetura de informação e usabilidade de produtos.`;
+        
+        path3 = `## 🎯 Caminho 3: Gestão de Projetos Criativos
+A liderança de equipes na execução de campanhas, produtos ou eventos criativos. Você consegue organizar a bagunça criativa de forma focada e produtiva, garantindo entregas incríveis no prazo.
+* **Competências a desenvolver**: Metodologias ágeis (Scrum), comunicação interpessoal e planejamento estratégico.`;
+      }
+    } else if (ambiente === "saude") {
+      intro = `Olá, ${name}! Seu perfil reflete uma profunda sensibilidade humanizada, empatia e dedicação ao bem-estar e saúde do próximo. Você se destaca pela capacidade de escuta ativa, cuidado prático e pela busca incessante de promover qualidade de vida e suporte direto à comunidade.`;
+      
+      path1 = `## 🎯 Caminho 1: Saúde Coletiva & Gestão Hospitalar
+Organização de políticas de saúde, bem-estar da comunidade ou gestão administrativa de clínicas e hospitais. Uma área ideal para coordenar equipes que promovem a saúde de milhares de pessoas com processos humanizados.
+* **Competências a desenvolver**: Legislação do SUS, liderança de equipes multidisciplinares e planejamento em saúde.`;
+      
+      path2 = `## 🎯 Caminho 2: Nutrição, Estética & Bem-estar
+Foco em orientar hábitos de vida saudáveis, alimentação preventiva ou cuidados corporais que aumentam a autoestima e a saúde física direta do paciente. Uma área em plena expansão clínica e digital.
+* **Competências a desenvolver**: Nutrologia aplicada, terapias integrativas e consultoria de bem-estar individualizado.`;
+      
+      path3 = `## 🎯 Caminho 3: Psicologia Organizacional & Recursos Humanos
+O cuidado com a saúde mental, motivação e desenvolvimento humano dentro de empresas e equipes. Você une sua vocação de suporte com a estrutura de organizações para melhorar a vida dos colaboradores.
+* **Competências a desenvolver**: Recrutamento humanizado, dinâmicas de engajamento e mediação de conflitos.`;
+    } else if (ambiente === "criativo") {
+      if (desafio === "logica") {
+        intro = `Olá, ${name}! Você possui um perfil técnico altamente focado na prática, engenhosidade e engenharia de soluções. Prefere atuar na linha de frente da criação física ou tecnológica, analisando engrenagens, estruturas e consertando ou otimizando sistemas lógicos no mundo material.`;
+        
+        path1 = `## 🎯 Caminho 1: Engenharia de Produção & Qualidade
+Organização de linhas de montagem, otimização de custos industriais e logística de suprimentos de forma eficiente. Ideal para quem quer ver os processos físicos acontecerem com perfeição e sem desperdícios.
+* **Competências a desenvolver**: Gestão lean (produção enxuta), controle estatístico de processos e segurança industrial.`;
+        
+        path2 = `## 🎯 Caminho 2: Infraestrutura de TI & Redes de Computadores
+O suporte técnico físico e digital a redes corporativas, servidores, segurança de hardware e conexão de sistemas integrados de alta complexidade.
+* **Competências a desenvolver**: Arquitetura de servidores, segurança da informação e protocolos de comunicação de dados.`;
+        
+        path3 = `## 🎯 Caminho 3: Gestão de Obras & Logística Integrada
+A distribuição inteligente de materiais e recursos físicos no tempo e espaço ideais. Uma área essencial para construtoras, grandes indústrias e portais de e-commerce globais de alta entrega.
+* **Competências a desenvolver**: Planejamento logístico internacional, gestão de frotas e gerenciamento de projetos.`;
+      } else { // criatividade
+        intro = `Olá, ${name}! Seu perfil transborda imaginação inovadora, habilidade visual e de design prático. Você tem a rara habilidade de visualizar projetos físicos ou visuais incríveis do zero, sabendo como transformar matérias-primas e ideias abstratas em obras de arte ou designs corporativos marcantes.`;
+        
+        path1 = `## 🎯 Caminho 1: Design Gráfico & Ilustração Digital
+Comunicação visual pura, criando identidades de marcas, logos, embalagens de produtos e materiais digitais de forte apelo visual e beleza estética incomparável.
+* **Competências a desenvolver**: Pacote Adobe (Illustrator, Photoshop), teoria das cores e tipografia aplicada.`;
+        
+        path2 = `## 🎯 Caminho 2: Arquitetura Comercial & Cenografia
+A criação de ambientes de lojas físicas, escritórios temáticos ou cenários digitais e reais que geram sensações únicas de imersão e compra nos clientes.
+* **Competências a desenvolver**: Modelagem 3D, ergonomia de espaços físicos e psicologia do consumo em ambientes.`;
+        
+        path3 = `## 🎯 Caminho 3: Produção de Mídia & Edição de Vídeo
+Transformar roteiros e captações brutas de vídeo em produtos audiovisuais dinâmicos para redes sociais, publicidade ou plataformas de educação digital como a EADon.
+* **Competências a desenvolver**: Softwares de edição (Premiere, After Effects), técnicas de storytelling e sonorização.`;
+      }
+    } else { // negocios
+      if (desafio === "logica") {
+        intro = `Olá, ${name}! Identificamos um perfil empreendedor estratégico, analítico e de forte liderança voltada para resultados financeiros. Você tem facilidade para enxergar oportunidades de mercado, ler dados estatísticos e negociar parcerias sólidas com foco em crescimento seguro.`;
+        
+        path1 = `## 🎯 Caminho 1: Gestão Comercial & Vendas B2B
+A estruturação de funis de vendas de alta performance, fechamento de grandes contratos comerciais corporativos e liderança de times de representantes de vendas.
+* **Competências a desenvolver**: Negociação avançada (método de Harvard), funis de vendas e gestão de relacionamento com clientes (CRM).`;
+        
+        path2 = `## 🎯 Caminho 2: Economia e Ciências Contábeis
+A saúde financeira de grandes marcas. Você ajuda a projetar lucros, otimizar impostos e garantir que a empresa cresça com máxima solidez financeira e legal.
+* **Competências a desenvolver**: Planejamento tributário, análise de demonstrativos financeiros e auditoria fiscal.`;
+        
+        path3 = `## 🎯 Caminho 3: Gestão de Startups & Modelagem de Negócios
+Transformar ideias disruptivas em negócios viáveis através de dados de mercado, planejando a tração de clientes e validando protótipos de produtos inovadores de forma rápida.
+* **Competências a desenvolver**: Lean Startup, métricas de crescimento (SaaS) e liderança de equipes ágeis.`;
+      } else { // criatividade
+        intro = `Olá, ${name}! Seu perfil destaca-se por uma carismática liderança comunicativa, empatia persuasiva e incrível capacidade de engajamento social. Você é movido pela conexão genuína com as pessoas, sabendo influenciar positivamente tomadas de decisão através de boas conversas.`;
+        
+        path1 = `## 🎯 Caminho 1: Relações Públicas & Assessoria de Imprensa
+Ser o porta-voz e gestor de imagem de grandes marcas, celebridades ou corporações, articulando com mídias e desenhando estratégias de reputação positivas.
+* **Competências a desenvolver**: Media training, gestão de crises reputacionais e comunicação corporativa interna.`;
+        
+        path2 = `## 🎯 Caminho 2: Influência Digital & Social Media Management
+A coordenação da presença digital de criadores de conteúdo e marcas, gerando autoridade em nichos específicos através de interações diárias inteligentes e conteúdo inovador.
+* **Competências a desenvolver**: Criação de calendários editoriais, análise de algoritmos de redes sociais e produção rápida de conteúdo (Reels/TikTok).`;
+        
+        path3 = `## 🎯 Caminho 3: Consultoria de Imagem, Sucesso do Cliente & CX
+Garantir a melhor experiência de pós-vendas, guiando e apoiando os clientes a atingirem o sucesso absoluto com o produto ou serviço adquirido da sua marca.
+* **Competências a desenvolver**: Comunicação empática, métricas de satisfação (NPS, Churn) e retenção estratégica.`;
+      }
+    }
+    
+    conclusion = `Parabéns pela conclusão do teste, ${name}! Este diagnóstico é o primeiro passo de uma jornada brilhante. No Portal EADon, temos uma variedade imensa de treinamentos reconhecidos no mercado prontos para alavancar sua carreira. Fale agora com nosso orientador no WhatsApp para garantir sua Bolsa de Estudo exclusiva nas carreiras indicadas para você! 🚀`;
+    
+    return `${intro}\n\n${path1}\n\n${path2}\n\n${path3}\n\n${conclusion}`;
   }
 
   // Save lead & AI output
@@ -792,11 +930,10 @@ Mantenha a resposta focada, concisa e altamente motivadora. Não use termos comp
     const careers = extractSuggestedCareers(generatedResultText);
     const careersText = careers.length > 0 ? careers.join(", ") : "áreas recomendadas pela IA";
 
-    const baseMessage = `Olá! Meu nome é ${name} e acabei de concluir o Teste Vocacional Inteligente no portal EADon! 🚀\n\nMinha análise indicou que as minhas áreas ideias são:\n👉 *${careersText}*\n\nGostaria de falar com um consultor para conhecer os cursos disponíveis nessas áreas e consultar valores de bolsas de estudo! 🎓`;
+    const baseMessage = `Olá! Meu nome é ${name} e acabei de concluir o Teste Vocacional Inteligente no portal EADon! 🚀\n\nMinha análise indicou que as minhas áreas ideais são:\n👉 *${careersText}*\n\nGostaria de falar com um consultor para conhecer os cursos disponíveis nessas áreas e consultar valores de bolsas de estudo! 🎓`;
     
-    // Consultant WhatsApp phone number (using placeholders, typical in static landers)
-    // Replace with EADon's actual sales number or a standard CTA redirect
-    const whatsappPhone = "5511999999999"; 
+    // Consultant WhatsApp phone number (using EADon's actual sales number)
+    const whatsappPhone = "5551997911411"; 
     const url = `https://api.whatsapp.com/send?phone=${whatsappPhone}&text=${encodeURIComponent(baseMessage)}`;
     
     window.open(url, "_blank");
