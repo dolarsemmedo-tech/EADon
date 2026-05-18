@@ -146,7 +146,7 @@
     overlay.className = "vt-modal-overlay";
     
     overlay.innerHTML = `
-      <div class="vt-modal-container" id="vt-modal-container">
+      <div class="vt-modal-container max-h-[90vh] overflow-y-auto" id="vt-modal-container">
         <div class="vt-modal-header">
           <h3>Orientador Vocacional - Múltiplas Inteligências</h3>
           <button class="vt-modal-close-btn" id="vt-modal-close" aria-label="Fechar modal">×</button>
@@ -204,6 +204,9 @@
     const footer = document.getElementById("vt-modal-footer");
     const container = document.getElementById("vt-modal-container");
     if (!body || !footer) return;
+
+    // Reset standard footer classes to prevent results page style leak
+    footer.className = "vt-modal-footer";
 
     // Clear contents
     body.innerHTML = "";
@@ -467,8 +470,8 @@
           <!-- Vertical Bar Chart -->
           <div class="vt-chart-block">
             <h5>Gráfico de Inteligências Predominantes:</h5>
-            <div class="vt-chart-container">
-              <div class="vt-chart-bars-row">
+            <div class="vt-chart-container overflow-x-auto scrollbar-none">
+              <div class="vt-chart-bars-row min-w-[550px] sm:min-w-0">
                 ${chartBarsHTML}
               </div>
             </div>
@@ -540,13 +543,16 @@
         });
       });
 
+      // Set responsive footer classes for results screen
+      footer.className = "vt-modal-footer flex flex-col w-full gap-2 sm:flex-row sm:w-auto";
+
       // Primary CTA redirects to courses portal
       footer.innerHTML = `
-        <button class="vt-btn vt-btn-secondary" id="vt-btn-copy-result-text">
+        <button class="vt-btn vt-btn-secondary w-full sm:w-auto" id="vt-btn-copy-result-text">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
           <span>Copiar Relatório</span>
         </button>
-        <button class="vt-btn vt-btn-primary" id="vt-btn-access-portal" style="background-image: linear-gradient(180deg, #F37610 0%, #FF9901 100%); box-shadow: 0 4px 15px rgba(243, 118, 16, 0.3);">
+        <button class="vt-btn vt-btn-primary w-full sm:w-auto" id="vt-btn-access-portal" style="background-image: linear-gradient(180deg, #F37610 0%, #FF9901 100%); box-shadow: 0 4px 15px rgba(243, 118, 16, 0.3);">
           <span>Acessar o portal dos cursos</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </button>

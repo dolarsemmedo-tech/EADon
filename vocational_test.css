@@ -83,7 +83,7 @@
   transform: translateY(40px);
   opacity: 0;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  overflow: hidden;
+  overflow-y: auto;
   position: relative;
 }
 
@@ -962,7 +962,8 @@
     font-size: 32px !important;
   }
   .vt-modal-container {
-    max-height: 95vh;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
   }
   .vt-modal-container.vt-modal-expanded {
     max-width: 100% !important;
@@ -976,9 +977,32 @@
   .vt-modal-footer {
     padding: 16px 20px 20px 20px;
   }
+  
+  /* Horizontal Scrolling support on Mobile Chart */
   .vt-chart-container {
     height: 180px;
+    overflow-x: auto !important;
+    scrollbar-width: thin !important;
   }
+  
+  .vt-chart-container::-webkit-scrollbar {
+    height: 4px !important;
+  }
+  
+  .vt-chart-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.01) !important;
+  }
+  
+  .vt-chart-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border-radius: 2px !important;
+  }
+  
+  .vt-chart-bars-row {
+    min-width: 550px !important; /* Force legibility for the 8 columns on drag */
+    padding-bottom: 6px;
+  }
+  
   .vt-chart-bar-outer {
     height: 100px;
   }
@@ -991,5 +1015,41 @@
   .vt-form-row {
     flex-direction: column;
     gap: 0;
+  }
+}
+
+/* Tailwind Utility Classes CSS Fallbacks for cross-compilation safety */
+.overflow-x-auto {
+  overflow-x: auto !important;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none !important;
+}
+.scrollbar-none {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+@media (max-width: 640px) {
+  .flex-col {
+    flex-direction: column !important;
+  }
+  .w-full {
+    width: 100% !important;
+  }
+  .gap-2 {
+    gap: 8px !important;
+  }
+}
+
+@media (min-width: 640px) {
+  .sm\:flex-row {
+    flex-direction: row !important;
+  }
+  .sm\:w-auto {
+    width: auto !important;
+  }
+  .sm\:min-w-0 {
+    min-width: 0 !important;
   }
 }
