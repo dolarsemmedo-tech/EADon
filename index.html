@@ -472,6 +472,104 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
     width: 26px;
     border-radius: 5px;
   }
+
+  /* ── Segundo carrossel vanilla (Cursos Livres) ── */
+  #vc2-section {
+    width: 100%;
+    padding: 0 0 32px 0;
+    box-sizing: border-box;
+  }
+  #vc2-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 0;
+  }
+  #vc2-btn-prev,
+  #vc2-btn-next {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.92);
+    color: #1b855a;
+    border: none;
+    font-size: 26px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.22);
+    transition: background 0.25s, color 0.25s, transform 0.2s;
+    user-select: none;
+    -webkit-user-select: none;
+    line-height: 1;
+    z-index: 10;
+  }
+  #vc2-btn-prev { margin-right: 12px; }
+  #vc2-btn-next { margin-left: 12px; }
+  #vc2-btn-prev:hover,
+  #vc2-btn-next:hover {
+    background: #1b855a;
+    color: #fff;
+    transform: scale(1.1);
+  }
+  #vc2-btn-prev:active,
+  #vc2-btn-next:active {
+    transform: scale(0.96);
+  }
+  #vc2-track-outer {
+    flex: 1;
+    overflow: hidden;
+    border-radius: 14px;
+  }
+  #vc2-track {
+    display: flex;
+    gap: 16px;
+    transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+  }
+  .vc2-slide {
+    flex-shrink: 0;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.28);
+    border-bottom: 4px solid #1b855a;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .vc2-slide:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(27,133,90,0.3);
+  }
+  .vc2-slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 14px 14px 0 0;
+  }
+  #vc2-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  .vc2-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.35);
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    transition: all 0.3s;
+  }
+  .vc2-dot.active {
+    background: #1b855a;
+    width: 26px;
+    border-radius: 5px;
+  }
 </style>
 </head>
 <body data-rsssl="1" class="home wp-singular page-template page-template-elementor_canvas page page-id-14 wp-embed-responsive wp-theme-hello-elementor hello-elementor-default elementor-default elementor-template-canvas elementor-kit-6 elementor-page elementor-page-14">
@@ -721,20 +819,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				<div class="elementor-widget-container">
 									<p>Clique na imagem para ver detalhes.</p>								</div>
 				</div>
-				<div class="elementor-element elementor-element-d153007 elementor-arrows-position-outside elementor-pagination-position-outside elementor-widget elementor-widget-image-carousel" data-id="d153007" data-element_type="widget" data-e-type="widget" data-settings="{&quot;slides_to_show&quot;:&quot;4&quot;,&quot;image_spacing_custom&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:8,&quot;sizes&quot;:[]},&quot;navigation&quot;:&quot;both&quot;,&quot;autoplay&quot;:&quot;yes&quot;,&quot;pause_on_hover&quot;:&quot;yes&quot;,&quot;pause_on_interaction&quot;:&quot;no&quot;,&quot;autoplay_speed&quot;:4000,&quot;infinite&quot;:&quot;yes&quot;,&quot;speed&quot;:800,&quot;image_spacing_custom_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;image_spacing_custom_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;arrows&quot;:&quot;yes&quot;,&quot;pagination&quot;:&quot;bullets&quot;}" data-widget_type="image-carousel.default">
-				<div class="elementor-widget-container">
-							<div class="elementor-image-carousel-wrapper swiper" role="region" aria-roledescription="carousel" aria-label="Carrossel de imagens" dir="ltr">
-			<div class="elementor-image-carousel swiper-wrapper" aria-live="off">
-								<div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="1 de 4"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/tecnicos.jpg" alt="tecnicos.jpg"></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="2 de 4"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/05/eja.jpg" alt="eja"></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="3 de 4"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/graduacao.jpg" alt="graduacao.jpg"></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="4 de 4"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/pos.jpg" alt="pos.jpg"></figure></div>			<div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="1 de 4"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/segunda-licenciatura.jpg" alt="segunda-licenciatura.jpg"></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="2 de 4"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/nrs.jpg" alt="nrs.jpg"></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="3 de 4"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/transito.jpg" alt="transito.jpg"></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="4 de 4"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/certificacao-por-competencia.jpg" alt="certificacao-por-competencia.jpg"></figure></div></div>
-												<div class="elementor-swiper-button elementor-swiper-button-prev" role="button" tabindex="0">
-						<svg aria-hidden="true" class="e-font-icon-svg e-eicon-chevron-left" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg"><path d="M646 125C629 125 613 133 604 142L308 442C296 454 292 471 292 487 292 504 296 521 308 533L604 854C617 867 629 875 646 875 663 875 679 871 692 858 704 846 713 829 713 812 713 796 708 779 692 767L438 487 692 225C700 217 708 204 708 187 708 171 704 154 692 142 675 129 663 125 646 125Z"></path></svg>					</div>
-					<div class="elementor-swiper-button elementor-swiper-button-next" role="button" tabindex="0">
-						<svg aria-hidden="true" class="e-font-icon-svg e-eicon-chevron-right" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg"><path d="M696 533C708 521 713 504 713 487 713 471 708 454 696 446L400 146C388 133 375 125 354 125 338 125 325 129 313 142 300 154 292 171 292 187 292 204 296 221 308 233L563 492 304 771C292 783 288 800 288 817 288 833 296 850 308 863 321 871 338 875 354 875 371 875 388 867 400 854L696 533Z"></path></svg>					</div>
-				
-									<div class="swiper-pagination"></div>
-									</div>
-						</div>
-				</div>
+
 <div id="vc-section">
   <div id="vc-wrapper">
     <button id="vc-btn-prev" aria-label="Anterior">‹</button>
@@ -811,24 +896,62 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				<div class="elementor-widget-container">
 									<p>Clique no botão abaixo e conheça nosso EAD.</p>								</div>
 				</div>
-		<div class="elementor-element elementor-element-3641ee68 e-con-full e-flex e-con e-child" data-id="3641ee68" data-element_type="container" data-e-type="container">
-				<div class="elementor-element elementor-element-28e55da elementor-arrows-position-outside elementor-pagination-position-outside elementor-widget elementor-widget-image-carousel" data-id="28e55da" data-element_type="widget" data-e-type="widget" data-settings="{&quot;slides_to_show&quot;:&quot;4&quot;,&quot;image_spacing_custom&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:8,&quot;sizes&quot;:[]},&quot;navigation&quot;:&quot;both&quot;,&quot;autoplay&quot;:&quot;yes&quot;,&quot;pause_on_hover&quot;:&quot;yes&quot;,&quot;pause_on_interaction&quot;:&quot;no&quot;,&quot;autoplay_speed&quot;:4000,&quot;infinite&quot;:&quot;yes&quot;,&quot;speed&quot;:800,&quot;image_spacing_custom_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;image_spacing_custom_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;arrows&quot;:&quot;yes&quot;,&quot;pagination&quot;:&quot;bullets&quot;}" data-widget_type="image-carousel.default">
-				<div class="elementor-widget-container">
-							<div class="elementor-image-carousel-wrapper swiper" role="region" aria-roledescription="carousel" aria-label="Carrossel de imagens" dir="ltr">
-			<div class="elementor-image-carousel swiper-wrapper" aria-live="off">
-								<div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="1 de 8"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/negocios-digitais.jpg" alt="negocios-digitais.jpg"></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="2 de 8"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/idiomas.jpg" alt="idiomas.jpg"></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="3 de 8"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/inteligencia-artificial.jpg" alt="inteligencia-artificial.jpg"></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="4 de 8"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/informatica.jpg" alt="informatica.jpg"></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="5 de 8"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/profissoes.jpg" alt="profissoes.jpg"></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="6 de 8"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/web-design.jpg" alt="web-design.jpg"></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="7 de 8"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/projetos-2.jpg" alt="projetos-2.jpg"></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="8 de 8"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/programacao.jpg" alt="programacao.jpg"></figure></div>			<div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="1 de 8"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/gastronomia.jpg" alt="gastronomia.jpg"></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="2 de 8"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/preparatorios.jpg" alt="preparatorios.jpg"></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="3 de 8"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/empresariais.jpg" alt="empresariais.jpg"></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="4 de 8"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/design-grafico.jpg" alt="design-grafico.jpg"></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="5 de 8"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/edicao-de-videos.jpg" alt="edicao-de-videos.jpg"></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="6 de 8"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/artes.jpg" alt="artes.jpg"></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="7 de 8"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/asb.jpg" alt="asb.jpg"></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="8 de 8"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/outros-cursos.jpg" alt="outros-cursos.jpg"></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="1 de 8"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/beleza.jpg" alt="beleza.jpg"></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="2 de 8"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/fitness.jpg" alt="fitness.jpg"></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="3 de 8"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/financas.jpg" alt="financas.jpg"></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="4 de 8"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/anuncios.jpg" alt="anuncios.jpg"></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="5 de 8"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/saude.jpg" alt="saude.jpg"></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="6 de 8"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/desenv-pessoal.jpg" alt="desenv-pessoal.jpg"></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="7 de 8"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/livros-digitais.jpg" alt="livros-digitais.jpg"></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="8 de 8"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="wp-content/uploads/2026/04/packs.jpg" alt="packs.jpg"></figure></div></div>
-												<div class="elementor-swiper-button elementor-swiper-button-prev" role="button" tabindex="0">
-						<svg aria-hidden="true" class="e-font-icon-svg e-eicon-chevron-left" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg"><path d="M646 125C629 125 613 133 604 142L308 442C296 454 292 471 292 487 292 504 296 521 308 533L604 854C617 867 629 875 646 875 663 875 679 871 692 858 704 846 713 829 713 812 713 796 708 779 692 767L438 487 692 225C700 217 708 204 708 187 708 171 704 154 692 142 675 129 663 125 646 125Z"></path></svg>					</div>
-					<div class="elementor-swiper-button elementor-swiper-button-next" role="button" tabindex="0">
-						<svg aria-hidden="true" class="e-font-icon-svg e-eicon-chevron-right" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg"><path d="M696 533C708 521 713 504 713 487 713 471 708 454 696 446L400 146C388 133 375 125 354 125 338 125 325 129 313 142 300 154 292 171 292 187 292 204 296 221 308 233L563 492 304 771C292 783 288 800 288 817 288 833 296 850 308 863 321 871 338 875 354 875 371 875 388 867 400 854L696 533Z"></path></svg>					</div>
-				
-									<div class="swiper-pagination"></div>
-									</div>
-						</div>
-				</div>
-				
-				
-				</div>
+<div id="vc2-section">
+  <div id="vc2-wrapper">
+    <button id="vc2-btn-prev" aria-label="Anterior">&#8249;</button>
+    <div id="vc2-track-outer">
+      <div id="vc2-track">
+        <div class="vc2-slide"><img src="wp-content/uploads/2026/04/negocios-digitais.jpg" alt="Negócios Digitais" loading="lazy"></div>
+        <div class="vc2-slide"><img src="wp-content/uploads/2026/04/idiomas.jpg" alt="Idiomas" loading="lazy"></div>
+        <div class="vc2-slide"><img src="wp-content/uploads/2026/04/inteligencia-artificial.jpg" alt="Inteligência Artificial" loading="lazy"></div>
+        <div class="vc2-slide"><img src="wp-content/uploads/2026/04/informatica.jpg" alt="Informática" loading="lazy"></div>
+        <div class="vc2-slide"><img src="wp-content/uploads/2026/04/profissoes.jpg" alt="Profissões" loading="lazy"></div>
+        <div class="vc2-slide"><img src="wp-content/uploads/2026/04/web-design.jpg" alt="Web Design" loading="lazy"></div>
+        <div class="vc2-slide"><img src="wp-content/uploads/2026/04/projetos-2.jpg" alt="Projetos" loading="lazy"></div>
+        <div class="vc2-slide"><img src="wp-content/uploads/2026/04/programacao.jpg" alt="Programação" loading="lazy"></div>
+        <div class="vc2-slide"><img src="wp-content/uploads/2026/04/gastronomia.jpg" alt="Gastronomia" loading="lazy"></div>
+        <div class="vc2-slide"><img src="wp-content/uploads/2026/04/preparatorios.jpg" alt="Preparatórios" loading="lazy"></div>
+        <div class="vc2-slide"><img src="wp-content/uploads/2026/04/empresariais.jpg" alt="Empresariais" loading="lazy"></div>
+        <div class="vc2-slide"><img src="wp-content/uploads/2026/04/design-grafico.jpg" alt="Design Gráfico" loading="lazy"></div>
+        <div class="vc2-slide"><img src="wp-content/uploads/2026/04/edicao-de-videos.jpg" alt="Edição de Vídeos" loading="lazy"></div>
+        <div class="vc2-slide"><img src="wp-content/uploads/2026/04/artes.jpg" alt="Artes" loading="lazy"></div>
+        <div class="vc2-slide"><img src="wp-content/uploads/2026/04/asb.jpg" alt="ASB" loading="lazy"></div>
+        <div class="vc2-slide"><img src="wp-content/uploads/2026/04/outros-cursos.jpg" alt="Outros Cursos" loading="lazy"></div>
+        <div class="vc2-slide"><img src="wp-content/uploads/2026/04/beleza.jpg" alt="Beleza" loading="lazy"></div>
+        <div class="vc2-slide"><img src="wp-content/uploads/2026/04/fitness.jpg" alt="Fitness" loading="lazy"></div>
+        <div class="vc2-slide"><img src="wp-content/uploads/2026/04/financas.jpg" alt="Finanças" loading="lazy"></div>
+        <div class="vc2-slide"><img src="wp-content/uploads/2026/04/anuncios.jpg" alt="Anúncios" loading="lazy"></div>
+        <div class="vc2-slide"><img src="wp-content/uploads/2026/04/saude.jpg" alt="Saúde" loading="lazy"></div>
+        <div class="vc2-slide"><img src="wp-content/uploads/2026/04/desenv-pessoal.jpg" alt="Desenvolvimento Pessoal" loading="lazy"></div>
+        <div class="vc2-slide"><img src="wp-content/uploads/2026/04/livros-digitais.jpg" alt="Livros Digitais" loading="lazy"></div>
+        <div class="vc2-slide"><img src="wp-content/uploads/2026/04/packs.jpg" alt="Packs" loading="lazy"></div>
+      </div>
+    </div>
+    <button id="vc2-btn-next" aria-label="Próximo">&#8250;</button>
+  </div>
+  <div id="vc2-dots">
+    <button class="vc2-dot active" data-index="0" aria-label="Ir para slide 1"></button>
+    <button class="vc2-dot" data-index="1" aria-label="Ir para slide 2"></button>
+    <button class="vc2-dot" data-index="2" aria-label="Ir para slide 3"></button>
+    <button class="vc2-dot" data-index="3" aria-label="Ir para slide 4"></button>
+    <button class="vc2-dot" data-index="4" aria-label="Ir para slide 5"></button>
+    <button class="vc2-dot" data-index="5" aria-label="Ir para slide 6"></button>
+    <button class="vc2-dot" data-index="6" aria-label="Ir para slide 7"></button>
+    <button class="vc2-dot" data-index="7" aria-label="Ir para slide 8"></button>
+    <button class="vc2-dot" data-index="8" aria-label="Ir para slide 9"></button>
+    <button class="vc2-dot" data-index="9" aria-label="Ir para slide 10"></button>
+    <button class="vc2-dot" data-index="10" aria-label="Ir para slide 11"></button>
+    <button class="vc2-dot" data-index="11" aria-label="Ir para slide 12"></button>
+    <button class="vc2-dot" data-index="12" aria-label="Ir para slide 13"></button>
+    <button class="vc2-dot" data-index="13" aria-label="Ir para slide 14"></button>
+    <button class="vc2-dot" data-index="14" aria-label="Ir para slide 15"></button>
+    <button class="vc2-dot" data-index="15" aria-label="Ir para slide 16"></button>
+    <button class="vc2-dot" data-index="16" aria-label="Ir para slide 17"></button>
+    <button class="vc2-dot" data-index="17" aria-label="Ir para slide 18"></button>
+    <button class="vc2-dot" data-index="18" aria-label="Ir para slide 19"></button>
+    <button class="vc2-dot" data-index="19" aria-label="Ir para slide 20"></button>
+  </div>
+</div>
 				<div class="elementor-element elementor-element-4cbfcbe5 elementor-align-center elementor-mobile-align-justify elementor-widget elementor-widget-button" data-id="4cbfcbe5" data-element_type="widget" data-e-type="widget" data-widget_type="button.default">
 				<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
@@ -1836,6 +1959,78 @@ document.addEventListener("DOMContentLoaded", function() {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
+  }
+})();
+</script>
+<script id="vanilla-carousel2-script">
+(function() {
+  function init2() {
+    var track   = document.getElementById('vc2-track');
+    var outer   = document.getElementById('vc2-track-outer');
+    var btnPrev = document.getElementById('vc2-btn-prev');
+    var btnNext = document.getElementById('vc2-btn-next');
+    var dots    = document.querySelectorAll('.vc2-dot');
+    var slides  = document.querySelectorAll('.vc2-slide');
+
+    if (!track || !outer || !btnPrev || !btnNext || slides.length === 0) {
+      setTimeout(init2, 100);
+      return;
+    }
+
+    var GAP = 16;
+    var current = 0;
+
+    function visible() { return window.innerWidth <= 768 ? 3 : 4; }
+
+    function slideW() {
+      var v = visible();
+      return (outer.offsetWidth - GAP * (v - 1)) / v;
+    }
+
+    function setSizes() {
+      var w = slideW();
+      slides.forEach(function(s) { s.style.width = w + 'px'; });
+    }
+
+    function maxIdx() { return Math.max(0, slides.length - visible()); }
+
+    function goTo(idx) {
+      if (idx < 0)        idx = maxIdx();
+      if (idx > maxIdx()) idx = 0;
+      current = idx;
+      var offset = current * (slideW() + GAP);
+      track.style.transform = 'translateX(-' + offset + 'px)';
+      dots.forEach(function(d, i) {
+        d.classList.toggle('active', i === current);
+      });
+    }
+
+    btnNext.addEventListener('click', function() { goTo(current + 1); });
+    btnPrev.addEventListener('click', function() { goTo(current - 1); });
+    dots.forEach(function(d) {
+      d.addEventListener('click', function() {
+        goTo(parseInt(this.getAttribute('data-index'), 10));
+      });
+    });
+
+    var timer2 = setInterval(function() { goTo(current + 1); }, 4000);
+    outer.addEventListener('mouseenter', function() { clearInterval(timer2); });
+    outer.addEventListener('mouseleave', function() {
+      clearInterval(timer2);
+      timer2 = setInterval(function() { goTo(current + 1); }, 4000);
+    });
+
+    window.addEventListener('resize', function() { setSizes(); goTo(current); });
+
+    setSizes();
+    goTo(0);
+    console.log('[VanillaCarousel2] Initialized successfully with', slides.length, 'slides.');
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init2);
+  } else {
+    init2();
   }
 })();
 </script>
