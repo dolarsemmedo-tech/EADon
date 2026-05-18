@@ -10,8 +10,8 @@
 }
 
 @keyframes vt-pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(0, 86, 224, 0.35), 0 0 40px rgba(0, 86, 224, 0.15); }
-  50% { box-shadow: 0 0 35px rgba(0, 86, 224, 0.65), 0 0 60px rgba(0, 86, 224, 0.25); }
+  0%, 100% { box-shadow: 0 0 20px rgba(243, 118, 16, 0.25), 0 0 40px rgba(243, 118, 16, 0.1); }
+  50% { box-shadow: 0 0 35px rgba(243, 118, 16, 0.5), 0 0 60px rgba(243, 118, 16, 0.18); }
 }
 
 @keyframes vt-fade-in {
@@ -37,7 +37,7 @@
 #btn-iniciar-teste-vocacional:hover {
   transform: translateY(-3px) scale(1.02) !important;
   filter: brightness(1.1);
-  box-shadow: 0 12px 30px rgba(0, 86, 224, 0.5) !important;
+  box-shadow: 0 12px 30px rgba(243, 118, 16, 0.4) !important;
 }
 
 .vocational-features-grid .feat-card:hover {
