@@ -775,6 +775,11 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
     padding: 20px;
     margin: -20px;
   }
+
+  /* Fix: prevent vc4 carousel negative margin from bleeding outside section */
+  #vc4-section {
+    overflow: hidden;
+  }
   
   /* Ensure backgrounds go full width */
   .elementor-element-6f66e804,
@@ -782,6 +787,11 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
   .elementor-element-5836de76 {
     width: 100% !important;
     max-width: 100% !important;
+  }
+
+  /* Fix: clip overflow in Histórias de Sucesso section to remove white bar on left */
+  .elementor-element-5836de76 {
+    overflow: hidden !important;
   }
   
   /* Ensure inner content stays boxed */
