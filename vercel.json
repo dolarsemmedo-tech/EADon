@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/portal",
-      "destination": "https://eadon.com.br/inoveead"
+      "destination": "/portal.html"
     }
   ]
 }
