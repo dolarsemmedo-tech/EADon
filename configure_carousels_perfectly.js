@@ -163,7 +163,7 @@ const customJS = `
 <script id="custom-carousel-script">
 (function() {
     var configuredCount = 0;
-    var totalSwipers = 3; // Cursos Reconhecidos, Cursos Livres, Histórias de Sucesso
+    var totalSwipers = 2; // Cursos Reconhecidos, Cursos Livres
     var swiperPollInterval = null;
     
     function startAndConfigureSwipers() {
